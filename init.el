@@ -68,15 +68,33 @@ This function should only modify configuration layer settings."
    ;; this file). If you need some configuration for these packages, then
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
+   dotspacemacs-additional-packages '(
                                       dracula-theme
-                                      ;; nodejs-repl
+                                      nodejs-repl
                                       )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(
+                                    evil-magit magit-gh-pulls magit-gitflow org-projectile evil-mc
+                                    evil-args evil-ediff evil-exchange evil-unimpaired
+                                    evil-indent-plus volatile-highlights smartparens
+                                    holy-mode skewer-mode rainbow-delimiters
+                                    highlight-indentation vi-tilde-fringe eyebrowse
+                                    smooth-scrolling org-repo-todo org-download org-timer
+                                    livid-mode evil-escape
+                                    leuven-theme gh-md evil-lisp-state spray lorem-ipsum
+                                    ac-ispell auto-complete auto-dictionary
+                                    clang-format define-word google-translate disaster epic
+                                    fancy-battery org-present orgit orglue
+                                    helm-flyspell flyspell-correct-helm clean-aindent-mode
+                                    helm-c-yasnippet ace-jump-helm-line helm-make
+                                    helm-themes helm-swoop smeargle
+                                    ido-vertical-mode flx-ido company-quickhelp counsel-projectile
+                                    window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
+                                    )
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -85,7 +103,7 @@ This function should only modify configuration layer settings."
    ;; installs only the used packages but won't delete unused ones. `all'
    ;; installs *all* packages supported by Spacemacs and never uninstalls them.
    ;; (default is `used-only')
-   dotspacemacs-install-packages 'used-only)
+   dotspacemacs-install-packages 'used-only))
 
 (defun dotspacemacs/init ()
   "Initialization:

@@ -47,7 +47,7 @@ This function should only modify configuration layer settings."
      ;; markdown
      react
      fasd
-     html
+     (html :variables web-fmt-tool 'web-beautify)
      javascript
      helm
      multiple-cursors
@@ -57,7 +57,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     ;; version-control
+     (version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
      yellow
      treemacs)
 
@@ -69,8 +69,7 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
                                       dracula-theme
-                                      nodejs-repl
-                                      diff-hl
+                                      ;; nodejs-repl
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -240,7 +239,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.1)
+   dotspacemacs-mode-line-theme '(spacemacs :separator arrow :separator-scale 1.1)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -579,7 +578,7 @@ before packages are loaded."
   (setq org-src-fontify-natively t)
   (setq aya-persist-snippets-dir "/Users/jack/.spacemacs.d/snippets/")
 
-  ;; (global-set-key (kbd "TAB") 'yas-expand)
+  (global-set-key (kbd "TAB") 'yas-expand)
   ;; (global-set-key (kbd "s-;") 'hippie-expand)
 
   (global-hungry-delete-mode )
@@ -625,20 +624,12 @@ before packages are loaded."
   ;; (set-face-foreground 'git-gutter:modified "yellow")
   ;; (set-face-foreground 'git-gutter:added "green")
   ;; (set-face-foreground 'git-gutter:deleted "red")
-  (use-package diff-hl
-    :ensure t
-    :config
-    (diff-hl-flydiff-mode)
-    (global-diff-hl-mode +1)
-    (diff-hl-margin-mode t)
-    (setq diff-hl-margin-side 'left)
-    )
 
   (use-package company
     :ensure
     :config
     (global-company-mode t)
-    ;; (setq company-minimum-prefix-length 1)
+    (setq company-minimum-prefix-length 1)
     (setq company-dabbrev-downcase nil)
     (setq company-prefix 1)
     (setq company-idle-delay 0.1)

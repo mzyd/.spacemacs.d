@@ -607,6 +607,8 @@ before packages are loaded."
   ;; setup document comment for js
   ;; (global-set-key (kbd "M-m o c") 'js-doc-insert-function-doc-snippet)
 
+  (global-set-key (kbd "M-m o c") 'helm-show-kill-ring)
+
   (global-set-key (kbd "s-;") 'company-files)
 
   (global-set-key (kbd "C-=") 'er/expand-region)

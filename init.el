@@ -683,6 +683,8 @@ before packages are loaded."
   ;; (global-set-key (kbd "<f7>") 'symbol-overlay-mode)
   (global-set-key (kbd "<f8>") 'symbol-overlay-remove-all)
 
+  (setq js2-mode-show-parse-errors nil)
+  (setq js2-mode-show-strict-warnings nil)
 
   ) ;; user-config-end
 

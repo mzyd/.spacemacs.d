@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
                                     evil-indent-plus volatile-highlights smartparens
                                     holy-mode skewer-mode rainbow-delimiters
                                     highlight-indentation vi-tilde-fringe eyebrowse
-                                    smooth-scrolling org-repo-todo org-download org-timer
+                                    smooth-scrolling org-repo-todo org-timer
                                     livid-mode evil-escape
                                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum
                                     ac-ispell auto-complete auto-dictionary
@@ -653,6 +653,10 @@ before packages are loaded."
     (setq company-dabbrev-downcase nil)
     (setq company-prefix 1)
     (setq company-idle-delay 0.1)
+    :bind
+    (:map company-active-map
+          ([tab] . smarter-yas-expand-next-field-complete)
+          ("TAB" . smarter-yas-expand-next-field-complete))
     )
 
   (use-package web-mode
@@ -678,13 +682,16 @@ before packages are loaded."
 
   ;; for symbol-overlay
   (global-set-key (kbd "M-i") 'symbol-overlay-put)
-  (global-set-key (kbd "M-n") 'symbol-overlay-switch-forward)
-  (global-set-key (kbd "M-p") 'symbol-overlay-switch-backward)
-  ;; (global-set-key (kbd "<f7>") 'symbol-overlay-mode)
+  (global-set-key (kbd "M-p") 'symbol-overlay-jump-prev)
+  (global-set-key (kbd "M-n") 'symbol-overlay-jump-next)
   (global-set-key (kbd "<f8>") 'symbol-overlay-remove-all)
 
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
+
+  (add-hook 'dired-mode-hook 'org-download-enable)
+
+  (setq org-image-actual-width 300)
 
   ) ;; user-config-end
 

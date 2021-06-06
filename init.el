@@ -32,26 +32,29 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     common-lisp
+     (vue :variables vue-backend 'lsp)
+     (node :variables node-add-modules-path t)
      auto-completion
      better-defaults
      emacs-lisp
-     ;; git
+     git
      helm
      lsp
-     ;; markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      react
      fasd
      (html :variables web-fmt-tool 'web-beautify)
      javascript
      helm
      multiple-cursors
-     ;; org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -69,8 +72,16 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      ;; cl-lib
+                                      slime
+                                      common-lisp-snippets
+                                      rainbow-delimiters
+                                      rainbow-mode
+                                      org-autolist
                                       dracula-theme
                                       nodejs-repl
+                                      flucui-themes
+                                      nyan-mode
                                       )
 
    ;; A list of packages that cannot be updated.
@@ -666,8 +677,8 @@ before packages are loaded."
     (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
     ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
     :config
-    (add-hook 'web-mode-hook 'company-mode)
-    (add-hook 'js-mode 'auto-completion)
+    ;; (add-hook 'web-mode-hook 'company-mode)
+    ;; (add-hook 'js-mode 'auto-completion)
     )
 
   (use-package css-mode
@@ -689,10 +700,38 @@ before packages are loaded."
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
 
-  (add-hook 'dired-mode-hook 'org-download-enable)
+  ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
   (setq org-image-actual-width 300)
 
+  (add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
+
+  (nyan-mode t)
+
+  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
+
+  ;; To turn it on automatically for all common-lisp buffers
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
+
+  ;; for common lisp
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq slime-contribs '(slime-fancy))
+  (require 'slime-autoloads)
+
+  ;; 切换buffer后，立即刷新
+  (defadvice switch-to-buffer (after revert-buffer-now activate)
+    (if (eq major-mode 'dired-mode)
+        (revert-buffer)))
+
+  ;; 执行shell-command后，立即刷新
+  (defadvice shell-command (after revert-buffer-now activate)
+    (if (eq major-mode 'dired-mode)
+        (revert-buffer)))
+
+  ;; 在Bookmark中进入dired buffer时自动刷新
+  ;; (dired-auto-revert-buffer t)
+
+  (exec-path-from-shell-initialize)
   ) ;; user-config-end
 
 

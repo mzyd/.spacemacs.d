@@ -45,6 +45,40 @@
 ;; (defun yellow/post-init-company()
 ;;   (setq company-minimum-prefix-length 1))
 
+(defun brackets-markup-region ()
+  "Insert a parentheses around a region."
+  (interactive)
+  (let ((p1 (line-beginning-position))
+        (p2 (line-end-position)))
+    (goto-char p2)
+    (insert ")")
+    (goto-char p1)
+    (insert "(")
+    (goto-char p2)
+    (forward-char 1)
+    ))
+
+(defun wrap-markup-region-by-tag ()
+  "Insert a markup 'tag-name' around a region."
+  (interactive)
+  (format "Please enter the tag you wanted:")
+  (let ((p1 (region-beginning))
+        (p2 (region-end))
+        (tag-name (read)))
+    (goto-char p2)
+    (insert (format "</%s>" tag-name))
+    (goto-char p1)
+    (insert (format "<%s>" tag-name))))
+
+(defun my-select-current-word ()
+  "Select the word under cursor.
+“word” here is considered any alphanumeric sequence with “_” or “-”."
+  (interactive)
+  (let (pt)
+    (skip-chars-backward "-_A-Za-z0-9")
+    (setq pt (point))
+    (skip-chars-forward "-_A-Za-z0-9")
+    (set-mark pt)))
 
 (defun yellow/init-youdao-dictionary()
   (use-package youdao-dictionary
@@ -118,23 +152,23 @@ If failed try to complete the common part with `company-complete-common'"
   (define-key company-active-map [tab] #'yas-expand)
   (define-key company-active-map (kbd "TAB") #'yas-expand))
 
-(defun html/init-emmet-mode ()
-  (use-package emmet-mode
-    :defer t
-    :init (spacemacs/add-to-hooks 'emmet-mode '(css-mode-hook
-                                                html-mode-hook
-                                                sass-mode-hook
-                                                scss-mode-hook
-                                                web-mode-hook))
-    :config
-    (progn
-      (evil-define-key 'insert emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (evil-define-key 'insert emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (evil-define-key 'emacs emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (evil-define-key 'emacs emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (evil-define-key 'hybrid emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (evil-define-key 'hybrid emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
-      (spacemacs|hide-lighter emmet-mode))))
+;; (defun html/init-emmet-mode ()
+;;   (use-package emmet-mode
+;;     :defer t
+;;     :init (spacemacs/add-to-hooks 'emmet-mode '(css-mode-hook
+;;                                                 html-mode-hook
+;;                                                 sass-mode-hook
+;;                                                 scss-mode-hook
+;;                                                 web-mode-hook))
+;;     :config
+;;     (progn
+;;       (evil-define-key 'insert emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (evil-define-key 'insert emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (evil-define-key 'emacs emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (evil-define-key 'emacs emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (evil-define-key 'hybrid emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (evil-define-key 'hybrid emmet-mode-keymap (kbd "<C-i>") 'spacemacs/emmet-expand)
+;;       (spacemacs|hide-lighter emmet-mode))))
 
 
 ;; ---------------------- auto save ----------------------

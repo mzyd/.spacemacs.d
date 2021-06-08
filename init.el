@@ -273,12 +273,12 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
-
+
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Hermit"
-                               :size 24
+                               :size 18
                                :weight ultra-light
                                :width normal
                                :powerline-scale 1.1
@@ -622,7 +622,8 @@ before packages are loaded."
 
   (global-set-key (kbd "s-;") 'company-files)
 
-  (global-set-key (kbd "C-=") 'er/expand-region)
+  ;; (global-set-key (kbd "C-=") 'er/expand-region)
+  (global-set-key (kbd "C-s-s") 'er/expand-region)
 
   ;; dired-mode 下的后退
   (global-set-key (kbd "s-b") 'dired-up-directory)
@@ -731,7 +732,6 @@ before packages are loaded."
   ;; 在Bookmark中进入dired buffer时自动刷新
   ;; (dired-auto-revert-buffer t)
 
-  (exec-path-from-shell-initialize)
   ) ;; user-config-end
 
 

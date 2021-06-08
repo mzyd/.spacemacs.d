@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: brace
-# key: bb
+# key: br
 # --
 { $1 }

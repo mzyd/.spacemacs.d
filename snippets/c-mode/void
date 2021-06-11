@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# contributor: Mzy
-# name: void function
-# key: voidf
-# --
-void $1($2)
-{ 
-    $3;
-}

@@ -273,13 +273,14 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
-
+   
    ;; Default font or prioritized list of fonts. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Hermit"
+   ;; dotspacemacs-default-font '("Hermit"
+   dotspacemacs-default-font '("Source code pro"
                                :size 18
-                               :weight ultra-light
+                               :weight light
                                :width normal
                                :powerline-scale 1.1
                                )
@@ -663,6 +664,8 @@ before packages are loaded."
     (global-company-mode t)
     (setq company-minimum-prefix-length 1)
     (setq company-dabbrev-downcase nil)
+    (setq company-dabbrev-code-everywhere t)
+    (setq company-dabbrev-minimum-length 2)
     (setq company-prefix 1)
     (setq company-idle-delay 0.1)
     :bind

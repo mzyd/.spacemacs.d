@@ -2,4 +2,4 @@
 # name: brace
 # key: bb
 # --
-{ $1 }
+{{ $1 }}

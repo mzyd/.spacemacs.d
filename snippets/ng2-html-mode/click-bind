@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: bind-click
-# key: click
-# --
-(click)="$1($2)"

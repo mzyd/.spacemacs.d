@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: Double brace
-# key: db
-# --
-{{ $1 }}

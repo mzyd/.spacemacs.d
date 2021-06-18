@@ -732,6 +732,7 @@ before packages are loaded."
     (if (eq major-mode 'dired-mode)
         (revert-buffer)))
 
+  ;; (setq projectile-git-submodule-command nil)
   ;; 在Bookmark中进入dired buffer时自动刷新
   ;; (dired-auto-revert-buffer t)
 

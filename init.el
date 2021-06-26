@@ -258,6 +258,7 @@ It should only modify the values of Spacemacs settings."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
                          dracula
+                         flucui-light
                          spacemacs-dark
                          spacemacs-light)
 
@@ -624,7 +625,7 @@ before packages are loaded."
   (global-set-key (kbd "s-;") 'company-files)
 
   ;; (global-set-key (kbd "C-=") 'er/expand-region)
-  (global-set-key (kbd "C-s-s") 'er/expand-region)
+  (global-set-key (kbd "C-s-p") 'er/expand-region)
 
   ;; dired-mode 下的后退
   (global-set-key (kbd "s-b") 'dired-up-directory)

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: double-bracket
-# key: bb
+# key: bk
 # --
-{{ $1 }}
+{ $1 }

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: double-bracket
+# name: bracket
 # key: bk
 # --
 { $1 }

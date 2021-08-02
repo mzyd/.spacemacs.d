@@ -60,10 +60,9 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     (version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
+     ;; '(version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
      yellow
      treemacs)
-
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -78,9 +77,11 @@ This function should only modify configuration layer settings."
                                       rainbow-delimiters
                                       rainbow-mode
                                       org-autolist
-                                      dracula-theme
+                                      ;; Leuven ; light theme
+                                      doom-themes
+                                      ;; dracula-theme
                                       nodejs-repl
-                                      flucui-themes
+                                      ;; flucui-themes
                                       nyan-mode
                                       )
 
@@ -257,9 +258,10 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-                         dracula
-                         flucui-light
+                         doom-dracula
                          spacemacs-dark
+                         ;; dracula
+                         ;; flucui-light
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -269,7 +271,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator arrow :separator-scale 1.1)
+   ;; dotspacemacs-mode-line-theme '(spacemacs :separator arrow :separator-scale 1.1)
+   dotspacemacs-mode-line-theme '(doom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -624,8 +627,7 @@ before packages are loaded."
 
   (global-set-key (kbd "s-;") 'company-files)
 
-  ;; (global-set-key (kbd "C-=") 'er/expand-region)
-  (global-set-key (kbd "C-s-p") 'er/expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
 
   ;; dired-mode 下的后退
   (global-set-key (kbd "s-b") 'dired-up-directory)
@@ -646,18 +648,38 @@ before packages are loaded."
   ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
   (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
 
-  ;; (global-git-gutter-mode +1)
-  ;; (custom-set-variables
-  ;;  '(git-gutter:window-width 2)
-  ;;  '(git-gutter:modified-sign "♣ ")
-  ;;  '(git-gutter:added-sign "♦ ")
-  ;;  '(git-gutter:deleted-sign "✘ ")
-  ;;  '(git-gutter:lighter "GG")
-  ;;  )
-  ;; ;; (set-face-background 'git-gutter:modified "yellow") ;; background color
-  ;; (set-face-foreground 'git-gutter:modified "yellow")
-  ;; (set-face-foreground 'git-gutter:added "green")
-  ;; (set-face-foreground 'git-gutter:deleted "red")
+  ;; (use-package diff-hl
+  ;;   :ensure t
+  ;;   :config
+  ;;   (global-diff-hl-mode 1)
+  ;;   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
+  ;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+  ;; (use-package git-gutter+
+  ;;   :ensure
+  ;;   :init (global-git-gutter+-mode)
+  ;;   )
+
+  (use-package git-gutter
+    :ensure
+    :init (progn
+            (setq-default
+             git-gutter:window-width 2
+             git-gutter:modified-sign "♣ "
+             git-gutter:added-sign "♦ "
+             git-gutter:deleted-sign "✘ "
+             git-gutter:lighter "GG")
+            )
+    (global-git-gutter-mode t)
+    (set-face-foreground 'git-gutter:modified "yellow")
+    (set-face-foreground 'git-gutter:added "green")
+    (set-face-foreground 'git-gutter:deleted "red")
+    ;; (evil-leader/set-key
+    ;;   "ghr" #'git-gutter:revert-hunk
+    ;;   "ghN" #'git-gutter:previous-hunk
+    ;;   "ghn" #'git-gutter:next-hunk
+    ;;   "ghs" #'git-gutter:stage-hunk)
+    )
 
   (use-package company
     :ensure
@@ -666,7 +688,7 @@ before packages are loaded."
     (setq company-minimum-prefix-length 1)
     (setq company-dabbrev-downcase nil)
     (setq company-dabbrev-code-everywhere t)
-    (setq company-dabbrev-minimum-length 2)
+    (setq company-dabbrev-minimum-length 1)
     (setq company-prefix 1)
     (setq company-idle-delay 0.1)
     :bind
@@ -679,9 +701,17 @@ before packages are loaded."
     :ensure
     :init
     ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
-    (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
     ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
     :config
+    (setq auto-mode-alist
+          (append
+           '(("\\.css\\'" . scss-mode))
+           '(("\\.wxml\\'" . web-mode))
+           '(("\\.html\\'" . web-mode))
+           '(("\\.js\\'" . js2-mode))
+           auto-mode-alist
+           ))
     ;; (add-hook 'web-mode-hook 'company-mode)
     ;; (add-hook 'js-mode 'auto-completion)
     )
@@ -696,11 +726,15 @@ before packages are loaded."
   (require 'zone)
   (zone-when-idle 600)
 
-  ;; for symbol-overlay
-  (global-set-key (kbd "M-i") 'symbol-overlay-put)
-  (global-set-key (kbd "M-p") 'symbol-overlay-jump-prev)
-  (global-set-key (kbd "M-n") 'symbol-overlay-jump-next)
-  (global-set-key (kbd "<f8>") 'symbol-overlay-remove-all)
+  (use-package symbol-overlay
+    :ensure t
+    :config
+    :bind ("M-i" . symbol-overlay-put)
+    ;; :bind ("M-n" . symbol-overlay-switch-forward)
+    ;; :bind ("M-p" . symbol-overlay-switch-backward)
+    :bind ("M-n" . symbol-overlay-jump-next)
+    :bind ("M-p" . symbol-overlay-jump-prev)
+    :bind ("<f8>" . symbol-overlay-remove-all))
 
   (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # contributor: Mzy
-# name: let
-# key: let
+# name: arrow-simple
+# key: arr
 # --
-let $1 = $2
+($1) => $2

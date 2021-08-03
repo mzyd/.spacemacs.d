@@ -60,7 +60,7 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     ;; '(version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
+     ;; (version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
      yellow
      treemacs)
 
@@ -72,6 +72,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
                                       ;; cl-lib
+                                      git-gutter
                                       slime
                                       common-lisp-snippets
                                       rainbow-delimiters
@@ -93,7 +94,7 @@ This function should only modify configuration layer settings."
                                     evil-magit magit-gh-pulls magit-gitflow org-projectile evil-mc
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
-                                    holy-mode skewer-mode rainbow-delimiters
+                                    holy-mode skewer-mode
                                     highlight-indentation vi-tilde-fringe eyebrowse
                                     smooth-scrolling org-repo-todo org-timer
                                     livid-mode evil-escape
@@ -271,8 +272,8 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   ;; dotspacemacs-mode-line-theme '(spacemacs :separator arrow :separator-scale 1.1)
-   dotspacemacs-mode-line-theme '(doom)
+   dotspacemacs-mode-line-theme '(spacemacs :separator arrow :separator-scale 1.1)
+   ;; dotspacemacs-mode-line-theme '(doom)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -605,7 +606,7 @@ before packages are loaded."
   (fringe-mode 0) ;; 边缘
   ;; (setq js2-mode-show-strict-warnings nil)
 
-  (setq linum-format " %d ")
+  ;; (setq linum-format "%d ")
   (electric-pair-mode t)
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (show-paren-mode t)
@@ -660,118 +661,118 @@ before packages are loaded."
   ;;   :init (global-git-gutter+-mode)
   ;;   )
 
-  (use-package git-gutter
-    :ensure
-    :init (progn
-            (setq-default
-             git-gutter:window-width 2
-             git-gutter:modified-sign "♣ "
-             git-gutter:added-sign "♦ "
-             git-gutter:deleted-sign "✘ "
-             git-gutter:lighter "GG")
-            )
-    (global-git-gutter-mode t)
-    (set-face-foreground 'git-gutter:modified "yellow")
-    (set-face-foreground 'git-gutter:added "green")
-    (set-face-foreground 'git-gutter:deleted "red")
-    ;; (evil-leader/set-key
-    ;;   "ghr" #'git-gutter:revert-hunk
-    ;;   "ghN" #'git-gutter:previous-hunk
-    ;;   "ghn" #'git-gutter:next-hunk
-    ;;   "ghs" #'git-gutter:stage-hunk)
-    )
+(use-package git-gutter
+  :ensure
+  :init (progn
+          (setq-default
+           git-gutter:window-width 2
+           git-gutter:modified-sign "♣ "
+           git-gutter:added-sign "♦ "
+           git-gutter:deleted-sign "✘ "
+           git-gutter:lighter "GG")
+          )
+  (global-git-gutter-mode t)
+  (set-face-foreground 'git-gutter:modified "yellow")
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:deleted "red")
+  ;; (evil-leader/set-key
+  ;;   "ghr" #'git-gutter:revert-hunk
+  ;;   "ghN" #'git-gutter:previous-hunk
+  ;;   "ghn" #'git-gutter:next-hunk
+  ;;   "ghs" #'git-gutter:stage-hunk)
+  )
 
-  (use-package company
-    :ensure
-    :config
-    (global-company-mode t)
-    (setq company-minimum-prefix-length 1)
-    (setq company-dabbrev-downcase nil)
-    (setq company-dabbrev-code-everywhere t)
-    (setq company-dabbrev-minimum-length 1)
-    (setq company-prefix 1)
-    (setq company-idle-delay 0.1)
-    :bind
-    (:map company-active-map
-          ([tab] . smarter-yas-expand-next-field-complete)
-          ("TAB" . smarter-yas-expand-next-field-complete))
-    )
+(use-package company
+  :ensure
+  :config
+  (global-company-mode t)
+  (setq company-minimum-prefix-length 1)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-code-everywhere t)
+  (setq company-dabbrev-minimum-length 1)
+  (setq company-prefix 1)
+  (setq company-idle-delay 0.1)
+  :bind
+  (:map company-active-map
+        ([tab] . smarter-yas-expand-next-field-complete)
+        ("TAB" . smarter-yas-expand-next-field-complete))
+  )
 
-  (use-package web-mode
-    :ensure
-    :init
-    ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
-    ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
-    ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
-    :config
-    (setq auto-mode-alist
-          (append
-           '(("\\.css\\'" . scss-mode))
-           '(("\\.wxml\\'" . web-mode))
-           '(("\\.html\\'" . web-mode))
-           '(("\\.js\\'" . js2-mode))
-           auto-mode-alist
-           ))
-    ;; (add-hook 'web-mode-hook 'company-mode)
-    ;; (add-hook 'js-mode 'auto-completion)
-    )
+(use-package web-mode
+  :ensure
+  :init
+  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
+  ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+  :config
+  (setq auto-mode-alist
+        (append
+         '(("\\.css\\'" . scss-mode))
+         '(("\\.wxml\\'" . web-mode))
+         '(("\\.html\\'" . web-mode))
+         '(("\\.js\\'" . js2-mode))
+         auto-mode-alist
+         ))
+  ;; (add-hook 'web-mode-hook 'company-mode)
+  ;; (add-hook 'js-mode 'auto-completion)
+  )
 
-  (use-package css-mode
-    :ensure
-    :init
-    (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
-    (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
-    )
+(use-package css-mode
+  :ensure
+  :init
+  (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
+  (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
+  )
 
-  (require 'zone)
-  (zone-when-idle 600)
+(require 'zone)
+(zone-when-idle 600)
 
-  (use-package symbol-overlay
-    :ensure t
-    :config
-    :bind ("M-i" . symbol-overlay-put)
-    ;; :bind ("M-n" . symbol-overlay-switch-forward)
-    ;; :bind ("M-p" . symbol-overlay-switch-backward)
-    :bind ("M-n" . symbol-overlay-jump-next)
-    :bind ("M-p" . symbol-overlay-jump-prev)
-    :bind ("<f8>" . symbol-overlay-remove-all))
+(use-package symbol-overlay
+  :ensure t
+  :config
+  :bind ("M-i" . symbol-overlay-put)
+  ;; :bind ("M-n" . symbol-overlay-switch-forward)
+  ;; :bind ("M-p" . symbol-overlay-switch-backward)
+  :bind ("M-n" . symbol-overlay-jump-next)
+  :bind ("M-p" . symbol-overlay-jump-prev)
+  :bind ("<f8>" . symbol-overlay-remove-all))
 
-  (setq js2-mode-show-parse-errors nil)
-  (setq js2-mode-show-strict-warnings nil)
+(setq js2-mode-show-parse-errors nil)
+(setq js2-mode-show-strict-warnings nil)
 
-  ;; (add-hook 'dired-mode-hook 'org-download-enable)
+;; (add-hook 'dired-mode-hook 'org-download-enable)
 
-  (setq org-image-actual-width 300)
+(setq org-image-actual-width 300)
 
-  (add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
+(add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
 
-  (nyan-mode t)
+(nyan-mode t)
 
-  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
 
-  ;; To turn it on automatically for all common-lisp buffers
-  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
+;; To turn it on automatically for all common-lisp buffers
+(spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
 
-  ;; for common lisp
-  (setq inferior-lisp-program "/usr/local/bin/sbcl")
-  (setq slime-contribs '(slime-fancy))
-  (require 'slime-autoloads)
+;; for common lisp
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq slime-contribs '(slime-fancy))
+(require 'slime-autoloads)
 
-  ;; 切换buffer后，立即刷新
-  (defadvice switch-to-buffer (after revert-buffer-now activate)
-    (if (eq major-mode 'dired-mode)
-        (revert-buffer)))
+;; 切换buffer后，立即刷新
+(defadvice switch-to-buffer (after revert-buffer-now activate)
+  (if (eq major-mode 'dired-mode)
+      (revert-buffer)))
 
-  ;; 执行shell-command后，立即刷新
-  (defadvice shell-command (after revert-buffer-now activate)
-    (if (eq major-mode 'dired-mode)
-        (revert-buffer)))
+;; 执行shell-command后，立即刷新
+(defadvice shell-command (after revert-buffer-now activate)
+  (if (eq major-mode 'dired-mode)
+      (revert-buffer)))
 
-  ;; (setq projectile-git-submodule-command nil)
-  ;; 在Bookmark中进入dired buffer时自动刷新
-  ;; (dired-auto-revert-buffer t)
+;; (setq projectile-git-submodule-command nil)
+;; 在Bookmark中进入dired buffer时自动刷新
+;; (dired-auto-revert-buffer t)
 
-  ) ;; user-config-end
+) ;; user-config-end
 
 
 ;; Do not write anything past this comment. This is where Emacs will

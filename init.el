@@ -661,118 +661,132 @@ before packages are loaded."
   ;;   :init (global-git-gutter+-mode)
   ;;   )
 
-(use-package git-gutter
-  :ensure
-  :init (progn
-          (setq-default
-           git-gutter:window-width 2
-           git-gutter:modified-sign "♣ "
-           git-gutter:added-sign "♦ "
-           git-gutter:deleted-sign "✘ "
-           git-gutter:lighter "GG")
-          )
-  (global-git-gutter-mode t)
+  (global-git-gutter-mode 1)
+  (custom-set-variables
+
+   '(git-gutter:window-width 2)
+   '(git-gutter:modified-sign "♣ ")
+   '(git-gutter:added-sign "♦ ")
+   '(git-gutter:deleted-sign "✘ ")
+   '(git-gutter:lighter "GG")
+   )
+  ;; (set-face-background 'git-gutter:modified "yellow") ;; background color
   (set-face-foreground 'git-gutter:modified "yellow")
   (set-face-foreground 'git-gutter:added "green")
   (set-face-foreground 'git-gutter:deleted "red")
-  ;; (evil-leader/set-key
-  ;;   "ghr" #'git-gutter:revert-hunk
-  ;;   "ghN" #'git-gutter:previous-hunk
-  ;;   "ghn" #'git-gutter:next-hunk
-  ;;   "ghs" #'git-gutter:stage-hunk)
-  )
 
-(use-package company
-  :ensure
-  :config
-  (global-company-mode t)
-  (setq company-minimum-prefix-length 1)
-  (setq company-dabbrev-downcase nil)
-  (setq company-dabbrev-code-everywhere t)
-  (setq company-dabbrev-minimum-length 1)
-  (setq company-prefix 1)
-  (setq company-idle-delay 0.1)
-  :bind
-  (:map company-active-map
-        ([tab] . smarter-yas-expand-next-field-complete)
-        ("TAB" . smarter-yas-expand-next-field-complete))
-  )
+  ;; (use-package git-gutter
+  ;;   :ensure
+  ;;   :init (progn
+  ;;           (setq-default
+  ;;            git-gutter:window-width 2
+  ;;            git-gutter:modified-sign "♣ "
+  ;;            git-gutter:added-sign "♦ "
+  ;;            git-gutter:deleted-sign "✘ "
+  ;;            git-gutter:lighter "GG")
+  ;;           )
+  ;;   (global-git-gutter-mode t)
+  ;;   (set-face-foreground 'git-gutter:modified "yellow")
+  ;;   (set-face-foreground 'git-gutter:added "green")
+  ;;   (set-face-foreground 'git-gutter:deleted "red")
+  ;;   ;; (evil-leader/set-key
+  ;;   ;;   "ghr" #'git-gutter:revert-hunk
+  ;;   ;;   "ghN" #'git-gutter:previous-hunk
+  ;;   ;;   "ghn" #'git-gutter:next-hunk
+  ;;   ;;   "ghs" #'git-gutter:stage-hunk)
+  ;;   )
 
-(use-package web-mode
-  :ensure
-  :init
-  ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
-  ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
-  :config
-  (setq auto-mode-alist
-        (append
-         '(("\\.css\\'" . scss-mode))
-         '(("\\.wxml\\'" . web-mode))
-         '(("\\.html\\'" . web-mode))
-         '(("\\.js\\'" . js2-mode))
-         auto-mode-alist
-         ))
-  ;; (add-hook 'web-mode-hook 'company-mode)
-  ;; (add-hook 'js-mode 'auto-completion)
-  )
+  (use-package company
+    :ensure
+    :config
+    (global-company-mode t)
+    (setq company-minimum-prefix-length 1)
+    (setq company-dabbrev-downcase nil)
+    (setq company-dabbrev-code-everywhere t)
+    (setq company-dabbrev-minimum-length 1)
+    (setq company-prefix 1)
+    (setq company-idle-delay 0.1)
+    :bind
+    (:map company-active-map
+          ([tab] . smarter-yas-expand-next-field-complete)
+          ("TAB" . smarter-yas-expand-next-field-complete))
+    )
 
-(use-package css-mode
-  :ensure
-  :init
-  (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
-  (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
-  )
+  (use-package web-mode
+    :ensure
+    :init
+    ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
+    :config
+    (setq auto-mode-alist
+          (append
+           '(("\\.css\\'" . scss-mode))
+           '(("\\.wxml\\'" . web-mode))
+           '(("\\.html\\'" . web-mode))
+           '(("\\.js\\'" . js2-mode))
+           auto-mode-alist
+           ))
+    ;; (add-hook 'web-mode-hook 'company-mode)
+    ;; (add-hook 'js-mode 'auto-completion)
+    )
 
-(require 'zone)
-(zone-when-idle 600)
+  (use-package css-mode
+    :ensure
+    :init
+    (add-to-list 'auto-mode-alist '("\\.scss\\'" . css-mode))
+    (add-to-list 'auto-mode-alist '("\\.wxss\\'" . css-mode))
+    )
 
-(use-package symbol-overlay
-  :ensure t
-  :config
-  :bind ("M-i" . symbol-overlay-put)
-  ;; :bind ("M-n" . symbol-overlay-switch-forward)
-  ;; :bind ("M-p" . symbol-overlay-switch-backward)
-  :bind ("M-n" . symbol-overlay-jump-next)
-  :bind ("M-p" . symbol-overlay-jump-prev)
-  :bind ("<f8>" . symbol-overlay-remove-all))
+  (require 'zone)
+  (zone-when-idle 600)
 
-(setq js2-mode-show-parse-errors nil)
-(setq js2-mode-show-strict-warnings nil)
+  (use-package symbol-overlay
+    :ensure t
+    :config
+    :bind ("M-i" . symbol-overlay-put)
+    ;; :bind ("M-n" . symbol-overlay-switch-forward)
+    ;; :bind ("M-p" . symbol-overlay-switch-backward)
+    :bind ("M-n" . symbol-overlay-jump-next)
+    :bind ("M-p" . symbol-overlay-jump-prev)
+    :bind ("<f8>" . symbol-overlay-remove-all))
 
-;; (add-hook 'dired-mode-hook 'org-download-enable)
+  ;; (setq js2-mode-show-parse-errors nil)
+  ;; (setq js2-mode-show-strict-warnings nil)
 
-(setq org-image-actual-width 300)
+  ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
-(add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
+  (setq org-image-actual-width 300)
 
-(nyan-mode t)
+  (add-hook 'org-mode-hook (lambda () (org-autolist-mode)))
 
-(add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
+  (nyan-mode t)
 
-;; To turn it on automatically for all common-lisp buffers
-(spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
+  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
 
-;; for common lisp
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
-(setq slime-contribs '(slime-fancy))
-(require 'slime-autoloads)
+  ;; To turn it on automatically for all common-lisp buffers
+  (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
 
-;; 切换buffer后，立即刷新
-(defadvice switch-to-buffer (after revert-buffer-now activate)
-  (if (eq major-mode 'dired-mode)
-      (revert-buffer)))
+  ;; for common lisp
+  (setq inferior-lisp-program "/usr/local/bin/sbcl")
+  (setq slime-contribs '(slime-fancy))
+  (require 'slime-autoloads)
 
-;; 执行shell-command后，立即刷新
-(defadvice shell-command (after revert-buffer-now activate)
-  (if (eq major-mode 'dired-mode)
-      (revert-buffer)))
+  ;; 切换buffer后，立即刷新
+  (defadvice switch-to-buffer (after revert-buffer-now activate)
+    (if (eq major-mode 'dired-mode)
+        (revert-buffer)))
 
-;; (setq projectile-git-submodule-command nil)
-;; 在Bookmark中进入dired buffer时自动刷新
-;; (dired-auto-revert-buffer t)
+  ;; 执行shell-command后，立即刷新
+  (defadvice shell-command (after revert-buffer-now activate)
+    (if (eq major-mode 'dired-mode)
+        (revert-buffer)))
 
-) ;; user-config-end
+  ;; (setq projectile-git-submodule-command nil)
+  ;; 在Bookmark中进入dired buffer时自动刷新
+  ;; (dired-auto-revert-buffer t)
+
+  ) ;; user-config-end
 
 
 ;; Do not write anything past this comment. This is where Emacs will

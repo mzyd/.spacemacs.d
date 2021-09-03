@@ -71,6 +71,8 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      swiper
+                                      ace-pinyin
                                       ;; cl-lib
                                       git-gutter
                                       slime
@@ -97,7 +99,7 @@ This function should only modify configuration layer settings."
                                     holy-mode skewer-mode
                                     highlight-indentation vi-tilde-fringe eyebrowse
                                     smooth-scrolling org-repo-todo org-timer
-                                    livid-mode evil-escape
+                                    livid-mode
                                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum
                                     ac-ispell auto-complete auto-dictionary
                                     clang-format define-word google-translate disaster epic
@@ -613,6 +615,8 @@ before packages are loaded."
   (setq org-src-fontify-natively t)
   (setq aya-persist-snippets-dir "/Users/jack/.spacemacs.d/snippets/")
 
+  (delete-selection-mode 1)
+
   (global-set-key (kbd "TAB") 'yas-expand)
   ;; (global-set-key (kbd "s-;") 'hippie-expand)
 
@@ -752,7 +756,7 @@ before packages are loaded."
     :bind ("<f8>" . symbol-overlay-remove-all))
 
   ;; (setq js2-mode-show-parse-errors nil)
-  ;; (setq js2-mode-show-strict-warnings nil)
+  (setq js2-mode-show-strict-warnings nil)
 
   ;; (add-hook 'dired-mode-hook 'org-download-enable)
 
@@ -785,6 +789,23 @@ before packages are loaded."
   ;; (setq projectile-git-submodule-command nil)
   ;; 在Bookmark中进入dired buffer时自动刷新
   ;; (dired-auto-revert-buffer t)
+
+
+  (setq-default evil-escape-delay 0.3)
+  (setq evil-escape-excluded-major-modes '(dired-mode))
+  (setq-default evil-escape-key-sequence "kj")
+  ;; disable evil-escape when input method is on
+  (evil-escape-mode 1)
+
+  (autoload 'ace-pinyin-jump-char-2 "ace-pinyin" "" t)
+  (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
+  (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
+  (define-key evil-normal-state-map (kbd ", a a") 'copy-word)
+  (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch)
+
+  (define-key evil-normal-state-map (kbd "SPC a a") 'copy-word)
+  (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
+
 
   ) ;; user-config-end
 

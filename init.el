@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (go :variables go-backend 'lsp go-run-command "ENV_VAR=foo go run" go-format-before-save t go-tab-width 4)
      common-lisp
      (vue :variables vue-backend 'lsp)
      (node :variables node-add-modules-path t)
@@ -651,7 +652,7 @@ before packages are loaded."
 
   ;; normal-state 下 RET 键打开最近的 buffer 列表
   ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
-  (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
+  ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
 
   ;; (use-package diff-hl
   ;;   :ensure t
@@ -802,6 +803,10 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
   (define-key evil-normal-state-map (kbd ", a a") 'copy-word)
   (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch)
+  (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
+  ;; Before you use this, you will be setup the hotkey of the 'lsp-rename' to 'rn'
+  (define-key evil-normal-state-map (kbd ", r r") 'lazy-helm/helm-mini)
+
 
   (define-key evil-normal-state-map (kbd "SPC a a") 'copy-word)
   (define-key evil-visual-state-map (kbd "v") 'er/expand-region)

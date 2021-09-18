@@ -38,7 +38,7 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (go :variables go-backend 'lsp go-run-command "ENV_VAR=foo go run" go-format-before-save t go-tab-width 4)
+     (go :variables gofmt-command "goimports" go-backend 'lsp go-run-command "ENV_VAR=foo go run" go-format-before-save t go-tab-width 4)
      common-lisp
      (vue :variables vue-backend 'lsp)
      (node :variables node-add-modules-path t)
@@ -810,6 +810,8 @@ before packages are loaded."
 
   (define-key evil-normal-state-map (kbd "SPC a a") 'copy-word)
   (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
+
+  ;; Meta-u 选中大写
 
 
   ) ;; user-config-end

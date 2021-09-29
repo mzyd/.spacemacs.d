@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(yaml
+   '(sql
+     yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -791,7 +792,6 @@ before packages are loaded."
   ;; 在Bookmark中进入dired buffer时自动刷新
   ;; (dired-auto-revert-buffer t)
 
-
   (setq-default evil-escape-delay 0.3)
   (setq evil-escape-excluded-major-modes '(dired-mode))
   (setq-default evil-escape-key-sequence "kj")
@@ -802,7 +802,8 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
   (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
   (define-key evil-normal-state-map (kbd ", a a") 'copy-word)
-  (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch)
+  ;; (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch-thing-at-point)
+  (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
   (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
   ;; Before you use this, you will be setup the hotkey of the 'lsp-rename' to 'rn'
   (define-key evil-normal-state-map (kbd ", r r") 'lazy-helm/helm-mini)

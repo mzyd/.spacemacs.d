@@ -3,4 +3,4 @@
 # name: log-color
 # key: llc
 # --
-console.log( "%c $1", 'background: yellow; color: purple', $2 )
+console.log('%c $1', 'background: yellow; color: purple', $2 )

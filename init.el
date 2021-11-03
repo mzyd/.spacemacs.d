@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(sql
+   '(
+     sql
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -73,6 +74,8 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      auto-complete
+                                      editorconfig
                                       swiper
                                       ace-pinyin
                                       ;; cl-lib
@@ -647,6 +650,9 @@ before packages are loaded."
   (setq-default js2-basic-offset 2)
   (setq-default js-indent-level 2)
 
+  ;; close the sideline of lsp-ui
+  ;; customize-group -> lsp-ui  -> lsp-ui-sideline -> off
+
   ;; 设置文件自动保存.
   ;; (auto-save-enable)
   ;; (setq auto-save-slient t)
@@ -757,6 +763,8 @@ before packages are loaded."
     :bind ("M-p" . symbol-overlay-jump-prev)
     :bind ("<f8>" . symbol-overlay-remove-all))
 
+  (setq lsp-ui-sideline-enable nil)
+
   ;; (setq js2-mode-show-parse-errors nil)
   (setq js2-mode-show-strict-warnings nil)
 
@@ -812,8 +820,13 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "SPC a a") 'copy-word)
   (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 
-  ;; Meta-u 选中大写
+  (global-set-key (kbd "C-s") 'swiper)
 
+  (editorconfig-mode 1)
+  ;; Meta-u 选中大写
+  ;; spc c y - copy and comment lines
+
+  (auto-complete-mode 1)
 
   ) ;; user-config-end
 

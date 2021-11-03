@@ -1,0 +1,26 @@
+# -*- mode: snippet -*-
+# name: template
+# key: tt
+# --
+
+<template>
+  <div class="$1">
+    $2
+  </div>
+</template>
+
+<script>
+
+export default {
+  data() {
+    return {
+
+    }
+  }
+}
+
+</script>
+
+<stytle scoped lang="scss">
+
+</stytle>

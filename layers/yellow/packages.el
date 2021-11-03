@@ -322,3 +322,10 @@ end tell
   ;;(paste-to-mark arg)
   )
 
+
+
+(defun remove-dos-eol ()
+  "Replace DOS eolns CR LF with Unix eolns CR"
+  (interactive)
+  (goto-char (point-min))
+  (while (search-forward "\r" nil t) (replace-match "")))

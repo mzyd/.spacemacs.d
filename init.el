@@ -2,6 +2,10 @@
 ;; This file is loaded by Spacemacs at startup.
 ;; It must be stored in your home directory.
 
+
+;; spc c y  - copy and comment line
+
+
 (defun dotspacemacs/layers ()
   "Layer configuration:
 This function should only modify configuration layer settings."
@@ -32,7 +36,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(typescript
      sql
      yaml
      ;; ----------------------------------------------------------------
@@ -74,6 +78,8 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      fzf
+                                      wgrep
                                       auto-complete
                                       editorconfig
                                       swiper
@@ -743,6 +749,8 @@ before packages are loaded."
     ;; (add-hook 'js-mode 'auto-completion)
     )
 
+  (setq auto-completion-idle-delay 0.01)
+
   (use-package css-mode
     :ensure
     :init
@@ -808,6 +816,11 @@ before packages are loaded."
 
   (autoload 'ace-pinyin-jump-char-2 "ace-pinyin" "" t)
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
+  (define-key evil-normal-state-map (kbd "; r") 'fzf-recentf)
+  (define-key evil-normal-state-map (kbd "; f") 'fzf)
+  (define-key evil-normal-state-map (kbd "; b") 'fzf-switch-buffer)
+  (define-key evil-normal-state-map (kbd "; g") 'fzf-git)
+
   (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
   (define-key evil-normal-state-map (kbd ", a a") 'copy-word)
   ;; (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch-thing-at-point)

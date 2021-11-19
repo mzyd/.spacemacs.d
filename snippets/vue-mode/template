@@ -21,6 +21,6 @@ export default {
 
 </script>
 
-<stytle scoped lang="scss">
+<style scoped lang="scss">
 
-</stytle>
+</style>

@@ -839,7 +839,8 @@ before packages are loaded."
   ;; Meta-u 选中大写
   ;; spc c y - copy and comment lines
 
-  (auto-complete-mode 1)
+  ;; forbid generate temporary files
+  (setq create-lockfiles nil)
 
   ) ;; user-config-end
 

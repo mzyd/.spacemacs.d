@@ -80,7 +80,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(
                                       fzf
                                       wgrep
-                                      auto-complete
                                       editorconfig
                                       swiper
                                       ace-pinyin
@@ -112,7 +111,7 @@ This function should only modify configuration layer settings."
                                     smooth-scrolling org-repo-todo org-timer
                                     livid-mode
                                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum
-                                    ac-ispell auto-complete auto-dictionary
+                                    ac-ispell auto-dictionary
                                     clang-format define-word google-translate disaster epic
                                     fancy-battery org-present orgit orglue
                                     helm-flyspell flyspell-correct-helm clean-aindent-mode
@@ -742,7 +741,7 @@ before packages are loaded."
            '(("\\.css\\'" . scss-mode))
            '(("\\.wxml\\'" . web-mode))
            '(("\\.html\\'" . web-mode))
-           '(("\\.js\\'" . js2-mode))
+           '(("\\.js\\'" . rjsx-mode))
            auto-mode-alist
            ))
     ;; (add-hook 'web-mode-hook 'company-mode)
@@ -770,6 +769,12 @@ before packages are loaded."
     :bind ("M-n" . symbol-overlay-jump-next)
     :bind ("M-p" . symbol-overlay-jump-prev)
     :bind ("<f8>" . symbol-overlay-remove-all))
+
+  (use-package auto-complete
+    :ensure t
+    :config
+    (auto-complete-mode t)
+    )
 
   (setq lsp-ui-sideline-enable nil)
 
@@ -841,6 +846,8 @@ before packages are loaded."
 
   ;; forbid generate temporary files
   (setq create-lockfiles nil)
+
+  (setq-default typescript-indent-level 2)
 
   ) ;; user-config-end
 

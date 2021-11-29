@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: action
-# key: act
+# key: action
 # --
 export const $1 = ($2) => {
   return {

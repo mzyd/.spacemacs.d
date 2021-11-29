@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: anon-arrow-function
-# key: aa
+# key: af
 # --
 ($1) => {
   $2

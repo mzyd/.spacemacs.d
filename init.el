@@ -297,7 +297,7 @@ It should only modify the values of Spacemacs settings."
    ;; Point size is recommended, because it's device independent. (default 10.0)
    ;; dotspacemacs-default-font '("Hermit"
    dotspacemacs-default-font '("Source code pro"
-                               :size 18
+                               :size 24
                                :weight light
                                :width normal
                                :powerline-scale 1.1
@@ -770,6 +770,10 @@ before packages are loaded."
     :bind ("M-n" . symbol-overlay-jump-next)
     :bind ("M-p" . symbol-overlay-jump-prev)
     :bind ("<f8>" . symbol-overlay-remove-all))
+
+  (add-hook 'js2-mode-hook
+            (lambda()
+              (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))))
 
   (setq lsp-ui-sideline-enable nil)
 

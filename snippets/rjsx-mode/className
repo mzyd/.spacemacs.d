@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: className
-# key: cs
+# key: cl
 # --
 className={ $1 }

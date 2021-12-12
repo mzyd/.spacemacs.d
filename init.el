@@ -777,7 +777,7 @@ before packages are loaded."
   (use-package auto-complete
     :ensure t
     :config
-    (auto-complete-mode t)
+    (global-auto-complete-mode t)
     )
 
   (setq lsp-ui-sideline-enable nil)

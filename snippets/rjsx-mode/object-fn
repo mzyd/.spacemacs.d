@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: object-fn
-# key: ofn
-# --
-$1 ($2) {
-  $3
-}

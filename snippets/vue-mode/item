@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: item
-# key: item
+# key: it
 # --
 item => $1

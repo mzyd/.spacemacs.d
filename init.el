@@ -3,7 +3,8 @@
 ;; It must be stored in your home directory.
 
 
-;; spc c y  - copy and comment line
+;; spc c y  : copy and comment line
+;; Meta - U : uppercase selelction
 
 
 (defun dotspacemacs/layers ()
@@ -78,6 +79,8 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      edit-at-point
+                                      counsel
                                       fzf
                                       wgrep
                                       editorconfig
@@ -106,10 +109,9 @@ This function should only modify configuration layer settings."
                                     evil-magit magit-gh-pulls magit-gitflow org-projectile evil-mc
                                     evil-args evil-ediff evil-exchange evil-unimpaired
                                     evil-indent-plus volatile-highlights smartparens
-                                    holy-mode skewer-mode
+                                    holy-mode skewer-mode livid-mod
                                     highlight-indentation vi-tilde-fringe eyebrowse
                                     smooth-scrolling org-repo-todo org-timer
-                                    livid-mode
                                     leuven-theme gh-md evil-lisp-state spray lorem-ipsum
                                     ac-ispell auto-dictionary
                                     clang-format define-word google-translate disaster epic
@@ -117,7 +119,7 @@ This function should only modify configuration layer settings."
                                     helm-flyspell flyspell-correct-helm clean-aindent-mode
                                     helm-c-yasnippet ace-jump-helm-line helm-make
                                     helm-themes helm-swoop smeargle
-                                    ido-vertical-mode flx-ido company-quickhelp counsel-projectile
+                                    ido-vertical-mode flx-ido company-quickhelp
                                     window-purpose ivy-purpose helm-purpose spacemacs-purpose-popwin
                                     )
 
@@ -770,9 +772,9 @@ before packages are loaded."
     :bind ("M-p" . symbol-overlay-jump-prev)
     :bind ("<f8>" . symbol-overlay-remove-all))
 
-  (add-hook 'js2-mode-hook
-            (lambda()
-              (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))))
+  ;; (add-hook 'js2-mode-hook
+  ;;           (lambda()
+  ;;             (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))))
 
   (use-package auto-complete
     :ensure t
@@ -831,22 +833,24 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "; g") 'fzf-git)
 
   (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
-  (define-key evil-normal-state-map (kbd ", a a") 'copy-word)
+  (define-key evil-normal-state-map (kbd ", a a") 'edit-at-point-word-copy)
   ;; (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch-thing-at-point)
   (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
   (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
   ;; Before you use this, you will be setup the hotkey of the 'lsp-rename' to 'rn'
   (define-key evil-normal-state-map (kbd ", r r") 'lazy-helm/helm-mini)
 
+  (global-set-key (kbd "M-m /") nil)
+  (global-set-key (kbd "M-m /") 'swiper-thing-at-point)
 
-  (define-key evil-normal-state-map (kbd "SPC a a") 'copy-word)
   (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 
-  (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "C-s") nil)
+  (global-set-key (kbd "C-s q s") 'isearch-forward)
+  (global-set-key (kbd "C-s s") 'swiper-thing-at-point)
 
-  (editorconfig-mode 1)
-  ;; Meta-u 选中大写
-  ;; spc c y - copy and comment lines
+  (global-set-key (kbd "C-s j") 'brackets-markup-region)
+  (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
 
   ;; forbid generate temporary files
   (setq create-lockfiles nil)

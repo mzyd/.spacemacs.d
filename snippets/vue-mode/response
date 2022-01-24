@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: reponse
+# key: res
+# --
+$1($2).then(res => {
+  console.log("res >> ", res)
+})

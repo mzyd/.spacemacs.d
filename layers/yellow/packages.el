@@ -296,36 +296,24 @@ end tell
     (start-process "cd-iterm2" nil "osascript" "-e" cmd)))
 
 
-
-
-
-
-
-
-
-(defun get-point (symbol &optional arg)
-  "get the point"
-  (funcall symbol arg)
-  (point))
-
-(defun copy-thing (begin-of-thing end-of-thing &optional arg)
-  "Copy thing between beg & end into kill ring."
-  (save-excursion
-    (let ((beg (get-point begin-of-thing 1))
-          (end (get-point end-of-thing arg)))
-      (copy-region-as-kill beg end))))
-
-(defun copy-word (&optional arg)
-  "Copy words at point into kill-ring"
-  (interactive "P")
-  (copy-thing 'backward-word 'forward-word arg)
-  ;;(paste-to-mark arg)
-  )
-
-
-
 (defun remove-dos-eol ()
   "Replace DOS eolns CR LF with Unix eolns CR"
   (interactive)
   (goto-char (point-min))
   (while (search-forward "\r" nil t) (replace-match "")))
+
+
+(defun rewrite-at-point ()
+  (interactive)
+  (progn
+    (edit-at-point-word-delete)
+    (evil-insert 1)
+    )
+  )
+
+(defun rewrite-selection ()
+  (interactive)
+  (progn
+    (evil-delete)
+    (evil-insert)
+    ))

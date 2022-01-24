@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # contributor: Mzy
 # name: arrow-simple
-# key: arr
+# key: as
 # --
 ($1) => $2

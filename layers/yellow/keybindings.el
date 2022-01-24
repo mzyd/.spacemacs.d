@@ -21,6 +21,4 @@
 
 (global-set-key (kbd "M-m o k") 'cd-iterm2)
 
-(global-set-key (kbd "C-s-j") 'brackets-markup-region)
-(global-set-key (kbd "C-s-k") 'wrap-markup-region-by-tag)
-
+(define-key evil-normal-state-map (kbd "SPC c c") 'rewrite-at-point)

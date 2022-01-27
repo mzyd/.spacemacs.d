@@ -834,11 +834,15 @@ before packages are loaded."
 
   (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
   (define-key evil-normal-state-map (kbd ", a a") 'edit-at-point-word-copy)
-  ;; (define-key evil-normal-state-map (kbd ", s s") 'swiper-isearch-thing-at-point)
   (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
   (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
   ;; Before you use this, you will be setup the hotkey of the 'lsp-rename' to 'rn'
   (define-key evil-normal-state-map (kbd ", r r") 'lazy-helm/helm-mini)
+
+  (define-key evil-normal-state-map (kbd "C-e") nil)
+  (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
+  (define-key evil-normal-state-map (kbd "s-n") nil)
+  (define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
 
   (global-set-key (kbd "M-m /") nil)
   (global-set-key (kbd "M-m /") 'swiper-thing-at-point)

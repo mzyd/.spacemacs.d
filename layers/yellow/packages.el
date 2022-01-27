@@ -310,10 +310,3 @@ end tell
     (evil-insert 1)
     )
   )
-
-(defun rewrite-selection ()
-  (interactive)
-  (progn
-    (evil-delete)
-    (evil-insert)
-    ))

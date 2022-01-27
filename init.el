@@ -778,8 +778,13 @@ before packages are loaded."
 
   (use-package auto-complete
     :ensure t
-    :config
-    (global-auto-complete-mode t)
+    :init
+    (progn
+      (ac-config-default)
+      (global-auto-complete-mode t))
+    :bind (:map ac-completing-map
+                ("C-n" . 'ac-next)
+                ("C-p" . 'ac-previous))
     )
 
   (setq lsp-ui-sideline-enable nil)

@@ -22,7 +22,7 @@
     (setq cur-item (car js-hook-list))
     (add-hook (intern (format "%s" cur-item))
               (lambda ()
-                (local-set-key (kbd "<SPC> o ;") 'my-comment-region))
+                (local-set-key evil-normal-state-map (kbd "<SPC> o ;") 'my-comment-region))
               )
     (setq js-hook-list (cdr js-hook-list))
     (setq index (+ index 1))

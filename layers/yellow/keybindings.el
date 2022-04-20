@@ -49,3 +49,55 @@
 
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
+
+(define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
+(define-key evil-normal-state-map (kbd ", a a") 'edit-at-point-word-copy)
+(define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
+(define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
+
+(define-key evil-normal-state-map (kbd "C-e") nil)
+(define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
+(define-key evil-normal-state-map (kbd "s-n") nil)
+(define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
+
+;; (global-set-key (kbd "M-m /") nil)
+;; (global-set-key (kbd "M-m /") 'swiper-thing-at-point)
+(spacemacs/set-leader-keys "/" nil)
+(spacemacs/set-leader-keys "/" 'swiper-thing-at-point)
+
+(define-key evil-visual-state-map (kbd "v") 'er/expand-region)
+
+(global-set-key (kbd "C-s") nil)
+(global-set-key (kbd "C-s q s") 'isearch-forward)
+(global-set-key (kbd "C-s s") 'swiper-thing-at-point)
+
+(global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
+
+;; (global-set-key (kbd "C-j") nil)
+
+(define-key evil-normal-state-map (kbd ", 0") 'winum-select-window-0)
+(define-key evil-normal-state-map (kbd ", 1") 'winum-select-window-1)
+(define-key evil-normal-state-map (kbd ", 2") 'winum-select-window-2)
+(define-key evil-normal-state-map (kbd ", 3") 'winum-select-window-3)
+(define-key evil-normal-state-map (kbd ", 4") 'winum-select-window-4)
+(define-key evil-normal-state-map (kbd ", w /") 'split-window-right)
+(define-key evil-normal-state-map (kbd ", w s") 'split-window-below)
+(define-key evil-normal-state-map (kbd ", w d") 'delete-window)
+
+;; comment indent
+(spacemacs/set-leader-keys ";" 'evilnc-comment-or-uncomment-lines)
+(spacemacs/set-leader-keys "=" 'spacemacs/indent-region-or-buffer)
+;; setup document comment for js
+;; (global-set-key (kbd "M-m o c") 'js-doc-insert-function-doc-snippet)
+
+(spacemacs/set-leader-keys "or" 'helm-show-kill-ring)
+
+(global-set-key (kbd "s-;") 'company-files)
+
+;; dired-mode backward
+(global-set-key (kbd "s-b") 'dired-up-directory)
+
+;; normal-state 下 RET 键打开最近的 buffer 列表
+;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
+;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
+

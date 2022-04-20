@@ -3,8 +3,11 @@
 ;; It must be stored in your home directory.
 
 
-;; spc c y  : copy and comment line
+;; spc c y  : copy and comment line == g y
 ;; Meta - U : uppercase selelction
+;; g d : go to define
+;; g ; - jump to last change
+;; g f - find-file-at-point
 
 
 (defun dotspacemacs/layers ()
@@ -60,6 +63,7 @@ This function should only modify configuration layer settings."
      fasd
      (html :variables web-fmt-tool 'web-beautify)
      javascript
+     java
      helm
      multiple-cursors
      org
@@ -79,9 +83,10 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      zone-rainbow ;; for fun
+                                      keyfreq
                                       edit-at-point
                                       counsel
-                                      fzf
                                       wgrep
                                       editorconfig
                                       swiper
@@ -90,7 +95,6 @@ This function should only modify configuration layer settings."
                                       git-gutter
                                       slime
                                       common-lisp-snippets
-                                      rainbow-delimiters
                                       rainbow-mode
                                       org-autolist
                                       ;; Leuven ; light theme
@@ -625,7 +629,7 @@ before packages are loaded."
   (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit)
   (show-paren-mode t)
   (setq org-src-fontify-natively t)
-  (setq aya-persist-snippets-dir "/Users/jack/.spacemacs.d/snippets/")
+  (setq aya-persist-snippets-dir "/Users/mzy/.spacemacs.d/snippets/")
 
   (delete-selection-mode 1)
 
@@ -633,21 +637,6 @@ before packages are loaded."
   ;; (global-set-key (kbd "s-;") 'hippie-expand)
 
   (global-hungry-delete-mode )
-
-  ;; comment indent
-  (global-set-key (kbd "M-m ;") 'evilnc-comment-or-uncomment-lines)
-  (global-set-key (kbd "M-m =") 'spacemacs/indent-region-or-buffer)
-  ;; setup document comment for js
-  ;; (global-set-key (kbd "M-m o c") 'js-doc-insert-function-doc-snippet)
-
-  (global-set-key (kbd "M-m o c") 'helm-show-kill-ring)
-
-  (global-set-key (kbd "s-;") 'company-files)
-
-  (global-set-key (kbd "C-=") 'er/expand-region)
-
-  ;; dired-mode 下的后退
-  (global-set-key (kbd "s-b") 'dired-up-directory)
 
   ;; org-mode 自动换行
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -663,10 +652,6 @@ before packages are loaded."
   ;; 设置文件自动保存.
   ;; (auto-save-enable)
   ;; (setq auto-save-slient t)
-
-  ;; normal-state 下 RET 键打开最近的 buffer 列表
-  ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
-  ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
 
   ;; (use-package diff-hl
   ;;   :ensure t
@@ -715,28 +700,9 @@ before packages are loaded."
   ;;   ;;   "ghs" #'git-gutter:stage-hunk)
   ;;   )
 
-  (use-package company
-    :ensure
-    :config
-    (global-company-mode t)
-    (setq company-minimum-prefix-length 1)
-    (setq company-dabbrev-downcase nil)
-    (setq company-dabbrev-code-everywhere t)
-    (setq company-dabbrev-minimum-length 1)
-    (setq company-prefix 1)
-    (setq company-idle-delay 0.1)
-    :bind
-    (:map company-active-map
-          ([tab] . smarter-yas-expand-next-field-complete)
-          ("TAB" . smarter-yas-expand-next-field-complete))
-    )
-
   (use-package web-mode
     :ensure
     :init
-    ;; (add-to-list 'auto-mode-alist '("\\.js\\'" . react-mode))
-    ;; (add-to-list 'auto-mode-alist '("\\.wxml\\'" . web-mode))
-    ;; (add-to-list 'auto-mode-alist '("\\.vue\\'" . web-mode))
     :config
     (setq auto-mode-alist
           (append
@@ -747,7 +713,7 @@ before packages are loaded."
            auto-mode-alist
            ))
     ;; (add-hook 'web-mode-hook 'company-mode)
-    ;; (add-hook 'js-mode 'auto-completion)
+    ;; (add-hook 'js2-mode 'auto-completion)
     )
 
   (setq auto-completion-idle-delay 0.01)
@@ -762,6 +728,7 @@ before packages are loaded."
   (require 'zone)
   (zone-when-idle 600)
 
+
   (use-package symbol-overlay
     :ensure t
     :config
@@ -771,21 +738,6 @@ before packages are loaded."
     :bind ("M-n" . symbol-overlay-jump-next)
     :bind ("M-p" . symbol-overlay-jump-prev)
     :bind ("<f8>" . symbol-overlay-remove-all))
-
-  ;; (add-hook 'js2-mode-hook
-  ;;           (lambda()
-  ;;             (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))))
-
-  (use-package auto-complete
-    :ensure t
-    :init
-    (progn
-      (ac-config-default)
-      (global-auto-complete-mode t))
-    :bind (:map ac-completing-map
-                ("C-n" . 'ac-next)
-                ("C-p" . 'ac-previous))
-    )
 
   (setq lsp-ui-sideline-enable nil)
 
@@ -800,7 +752,8 @@ before packages are loaded."
 
   (nyan-mode t)
 
-  (add-hook 'emacs-lisp-mode #'rainbow-delimiters-mode)
+
+  (keyfreq-mode t)
 
   ;; To turn it on automatically for all common-lisp buffers
   (spacemacs/toggle-evil-safe-lisp-structural-editing-on-register-hook-common-lisp-mode)
@@ -810,20 +763,6 @@ before packages are loaded."
   (setq slime-contribs '(slime-fancy))
   (require 'slime-autoloads)
 
-  ;; 切换buffer后，立即刷新
-  (defadvice switch-to-buffer (after revert-buffer-now activate)
-    (if (eq major-mode 'dired-mode)
-        (revert-buffer)))
-
-  ;; 执行shell-command后，立即刷新
-  (defadvice shell-command (after revert-buffer-now activate)
-    (if (eq major-mode 'dired-mode)
-        (revert-buffer)))
-
-  ;; (setq projectile-git-submodule-command nil)
-  ;; 在Bookmark中进入dired buffer时自动刷新
-  ;; (dired-auto-revert-buffer t)
-
   (setq-default evil-escape-delay 0.3)
   (setq evil-escape-excluded-major-modes '(dired-mode))
   (setq-default evil-escape-key-sequence "kj")
@@ -831,41 +770,11 @@ before packages are loaded."
   (evil-escape-mode 1)
 
   (autoload 'ace-pinyin-jump-char-2 "ace-pinyin" "" t)
+  (define-key evil-normal-state-map (kbd "; r") 'evil-repeat-find-char)
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
-  (define-key evil-normal-state-map (kbd "; r") 'fzf-recentf)
-  (define-key evil-normal-state-map (kbd "; f") 'fzf)
-  (define-key evil-normal-state-map (kbd "; b") 'fzf-switch-buffer)
-  (define-key evil-normal-state-map (kbd "; g") 'fzf-git)
-
-  (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
-  (define-key evil-normal-state-map (kbd ", a a") 'edit-at-point-word-copy)
-  (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
-  (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
-  ;; Before you use this, you will be setup the hotkey of the 'lsp-rename' to 'rn'
-  (define-key evil-normal-state-map (kbd ", r r") 'lazy-helm/helm-mini)
-
-  (define-key evil-normal-state-map (kbd "C-e") nil)
-  (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
-  (define-key evil-normal-state-map (kbd "s-n") nil)
-  (define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
-
-  (global-set-key (kbd "M-m /") nil)
-  (global-set-key (kbd "M-m /") 'swiper-thing-at-point)
-
-  (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
-
-  (global-set-key (kbd "C-s") nil)
-  (global-set-key (kbd "C-s q s") 'isearch-forward)
-  (global-set-key (kbd "C-s s") 'swiper-thing-at-point)
-
-  (global-set-key (kbd "C-s j") 'brackets-markup-region)
-  (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
 
   ;; forbid generate temporary files
   (setq create-lockfiles nil)
-
-  (setq-default typescript-indent-level 2)
-
   ) ;; user-config-end
 
 

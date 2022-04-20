@@ -45,19 +45,6 @@
 ;; (defun yellow/post-init-company()
 ;;   (setq company-minimum-prefix-length 1))
 
-(defun brackets-markup-region ()
-  "Insert a parentheses around a region."
-  (interactive)
-  (let ((p1 (line-beginning-position))
-        (p2 (line-end-position)))
-    (goto-char p2)
-    (insert ")")
-    (goto-char p1)
-    (insert "(")
-    (goto-char p2)
-    (forward-char 1)
-    ))
-
 (defun wrap-markup-region-by-tag ()
   "Insert a markup 'tag-name' around a region."
   (interactive)
@@ -130,6 +117,7 @@
       (unless (re-search-forward "\\/\\*" nil t)
         (insert "/*\n")))
     ))
+
 
 (defun smarter-yas-expand-next-field-complete ()
   "Try to `yas-expand' and `yas-next-field' at current cursor position.
@@ -310,3 +298,49 @@ end tell
     (evil-insert 1)
     )
   )
+
+(defun add-semicolon ();
+  (interactive)
+  (evil-append-line 1)
+  (insert ";")
+  (evil-normal-state)
+  )
+
+
+
+(defun format-html ()
+  (interactive)
+  (let ((pos (line-beginning-position)))
+    (message pos)
+    (end-of-line)
+    (set-mark pos))
+
+  ;; (skip-chars-forward "-")
+  ;; (evil-insert 1)
+  ;; (insert "\n")
+  )
+
+(defun wrap-parenthesis-at-point ()
+  "Select the word under cursor.
+“word” here is considered any alphanumeric sequence with “_” or “-”."
+  (interactive)
+  (let (pt)
+    (skip-chars-backward "-_A-Za-z0-9")
+    (setq pt (point))
+    (skip-chars-forward "-_A-Za-z0-9")
+    (set-mark pt)
+    )
+  (let (
+        (p1 (region-beginning))
+        (p2 (region-end))
+        )
+    (goto-char p2)
+    (insert ")")
+    (goto-char p1)
+    (insert "(")
+    (goto-char (+ p2 1))
+    (evil-insert 1)
+    ;; (evil-append 1)
+    )
+  )
+

@@ -709,7 +709,7 @@ before packages are loaded."
            '(("\\.css\\'" . scss-mode))
            '(("\\.wxml\\'" . web-mode))
            '(("\\.html\\'" . web-mode))
-           '(("\\.js\\'" . rjsx-mode))
+           '(("\\.js\\'" . js2-mode))
            auto-mode-alist
            ))
     ;; (add-hook 'web-mode-hook 'company-mode)

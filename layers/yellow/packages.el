@@ -118,6 +118,16 @@
         (insert "/*\n")))
     ))
 
+;; (defun mzy/test-123 ()
+;;   (dolist (hook (list 'rjsx-mode-hook 'js2-mode-hook 'vue-mode-hook))
+;;     (add-hook hook '(lambda ()
+;;                       ;; This is not a good way for bind a key in a keymap
+;;                       ;; (local-set-key (kbd "<SPC> o ;") 'my-comment-region)
+;;                       ;; this way is fine, but it will be working in global
+;;                       (define-key evil-normal-state-map (kbd "<SPC> o ;") 'my-comment-region)
+;;                       ))
+;;     ))
+;; (mzy/test-123)
 
 (defun smarter-yas-expand-next-field-complete ()
   "Try to `yas-expand' and `yas-next-field' at current cursor position.
@@ -343,4 +353,21 @@ end tell
     ;; (evil-append 1)
     )
   )
+
+(defun mzy/open-cur-finder ()
+  (interactive)
+  (shell-command "open .")
+  )
+
+(defun mzy/edit-at-point-cut-word ()
+  (interactive)
+  (edit-at-point-word-cut)
+  (evil-insert 1)
+  )
+
+
+;; (defun mzy/open-finder-by-fasd ()
+;;   (interactive)
+;;   (helm-fasd "front")
+;;   )
 

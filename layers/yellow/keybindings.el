@@ -13,34 +13,27 @@
 (spacemacs/set-leader-keys "oo" 'occur-dwim)
 (spacemacs/set-leader-keys "oi" 'iedit-mode)
 
-;; comment region in js
-(defun set-hotkey-for-js ()
-  (setq js-hook-list
-        '("js-mode-hook" "js2-mode-hook" "rjsx-mode-hook" "vue-mode-hook"))
-  (setq index 0)
-  (while (< index 4)
-    (setq cur-item (car js-hook-list))
-    (add-hook (intern (format "%s" cur-item))
-              (lambda ()
-                (local-set-key evil-normal-state-map (kbd "<SPC> o ;") 'my-comment-region))
-              )
-    (setq js-hook-list (cdr js-hook-list))
-    (setq index (+ index 1))
-    )
-  )
-(set-hotkey-for-js)
+;; ;; comment region in js
+;; (defun set-hotkey-for-js ()
+;;   (setq js-hook-list
+;;         '("js-mode-hook" "js2-mode-hook" "rjsx-mode-hook" "vue-mode-hook"))
+;;   (setq index 0)
+;;   (while (< index 4)
+;;     (setq cur-item (car js-hook-list))
+;;     (add-hook (intern (format "%s" cur-item))
+;;               (lambda ()
+;;                 (local-set-key evil-normal-state-map (kbd "<SPC> o ;") 'my-comment-region))
+;;               )
+;;     (setq js-hook-list (cdr js-hook-list))
+;;     (setq index (+ index 1))
+;;     )
+;;   )
+;; (set-hotkey-for-js)
 
-;; (defun test-123 ()
-;;   (dolist (hook (list 'rjsx-mode-hook 'js2-mode-hook))
-;;     (message "%s" hook)
-;;     (add-hook (intern (format "%s" hook)) (lambda () (
-;;                                 (local-set-key (kbd "<SPC> o ;") 'my-comment-region)
-;;                                 )))
-;;     ))
-;; (test-123)
 
 ;; package.el 里面的方法, 自动模板的快捷键
 ;; (global-set-key (kbd "M-m o s") 'autoinsert-yas-expand)
+
 
 
 (global-set-key (kbd "M-m o k") 'cd-iterm2)
@@ -51,7 +44,8 @@
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
 
 (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
-(define-key evil-normal-state-map (kbd ", a a") 'edit-at-point-word-copy)
+(define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
+(define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
 (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
 (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
 
@@ -59,11 +53,11 @@
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
 (define-key evil-normal-state-map (kbd "s-n") nil)
 (define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
+(global-set-key (kbd "C-;") 'hungry-delete-backward)
 
-;; (global-set-key (kbd "M-m /") nil)
-;; (global-set-key (kbd "M-m /") 'swiper-thing-at-point)
 (spacemacs/set-leader-keys "/" nil)
-(spacemacs/set-leader-keys "/" 'swiper-thing-at-point)
+(spacemacs/set-leader-keys "/" 'replace-regexp)
+(define-key evil-visual-state-map (kbd ", s r") 'replace-string)
 
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 
@@ -91,6 +85,7 @@
 ;; (global-set-key (kbd "M-m o c") 'js-doc-insert-function-doc-snippet)
 
 (spacemacs/set-leader-keys "or" 'helm-show-kill-ring)
+(spacemacs/set-leader-keys "o." 'mzy/open-cur-finder)
 
 (global-set-key (kbd "s-;") 'company-files)
 
@@ -98,6 +93,5 @@
 (global-set-key (kbd "s-b") 'dired-up-directory)
 
 ;; normal-state 下 RET 键打开最近的 buffer 列表
-;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
+(define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
 ;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)
-

@@ -40,15 +40,20 @@
 
 (define-key evil-normal-state-map (kbd ", ;") 'add-semicolon)
 
-(global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
-(spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
-
 (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
-(define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
-(define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
 (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
 (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
 
+;; Cancel the default function
+(define-key evil-motion-state-map (kbd ";") nil)
+(define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
+(define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
+(define-key evil-normal-state-map (kbd "; r s") 'mzy/evil-ex-s)
+(define-key evil-normal-state-map (kbd "; r r") 'mzy/evil-ex-%s)
+(define-key evil-normal-state-map (kbd "; w p") 'mzy/edit-at-point-word-paste)
+
+(global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
+(spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
 (define-key evil-normal-state-map (kbd "C-e") nil)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
 (define-key evil-normal-state-map (kbd "s-n") nil)
@@ -64,7 +69,6 @@
 (global-set-key (kbd "C-s") nil)
 (global-set-key (kbd "C-s q s") 'isearch-forward)
 (global-set-key (kbd "C-s s") 'swiper-thing-at-point)
-
 (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
 
 ;; (global-set-key (kbd "C-j") nil)
@@ -83,12 +87,12 @@
 (spacemacs/set-leader-keys "=" 'spacemacs/indent-region-or-buffer)
 ;; setup document comment for js
 ;; (global-set-key (kbd "M-m o c") 'js-doc-insert-function-doc-snippet)
-
-(spacemacs/set-leader-keys "or" 'helm-show-kill-ring)
+(spacemacs/set-leader-keys "oh" 'helm-show-kill-ring)
 (spacemacs/set-leader-keys "o." 'mzy/open-cur-finder)
+(spacemacs/set-leader-keys "olu" 'edit-at-point-line-up)
+(spacemacs/set-leader-keys "old" 'edit-at-point-line-down)
 
 (global-set-key (kbd "s-;") 'company-files)
-
 ;; dired-mode backward
 (global-set-key (kbd "s-b") 'dired-up-directory)
 

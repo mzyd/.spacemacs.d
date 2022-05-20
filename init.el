@@ -770,7 +770,7 @@ before packages are loaded."
   (evil-escape-mode 1)
 
   (autoload 'ace-pinyin-jump-char-2 "ace-pinyin" "" t)
-  (define-key evil-normal-state-map (kbd "; r") 'evil-repeat-find-char)
+  ;; (define-key evil-normal-state-map (kbd "; r") 'evil-repeat-find-char)
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
 
   ;; forbid generate temporary files

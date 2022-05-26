@@ -375,14 +375,6 @@ end tell
   (evil-ex "%s/")
   )
 
-(defun mzy/edit-at-point-word-paste ()
-  (interactive)
-  (edit-at-point-word-delete)
-  (backward-char 1)
-  (edit-at-point-word-paste)
-  )
-
-
 ;; (defun mzy/open-finder-by-fasd ()
 ;;   (interactive)
 ;;   (helm-fasd "front")

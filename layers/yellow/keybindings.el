@@ -48,9 +48,11 @@
 (define-key evil-motion-state-map (kbd ";") nil)
 (define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
 (define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
-(define-key evil-normal-state-map (kbd "; r s") 'mzy/evil-ex-s)
+(define-key evil-normal-state-map (kbd "; s c") 'edit-at-point-word-cut)
+(define-key evil-normal-state-map (kbd "; s r") 'mzy/evil-ex-s)
 (define-key evil-normal-state-map (kbd "; r r") 'mzy/evil-ex-%s)
-(define-key evil-normal-state-map (kbd "; w p") 'mzy/edit-at-point-word-paste)
+(define-key evil-normal-state-map (kbd "; s p") 'edit-at-point-word-paste)
+(define-key evil-normal-state-map (kbd "; s d") 'edit-at-point-word-delete)
 
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)

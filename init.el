@@ -5,6 +5,10 @@
 
 ;; spc c y  : copy and comment line == g y
 ;; Meta - U : uppercase selelction
+;; g u: downcase the region
+;; g u u: downcase the current line
+;; g U: upcase the region
+;; g U U: upcase the current line
 ;; g d : go to define
 ;; g ; - jump to last change
 ;; g f - find-file-at-point
@@ -617,6 +621,13 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+
+  (use-package exec-path-from-shell
+    :if (memq window-system '(ns mac))
+    :ensure t
+    :config
+    (setq exec-path-from-shell-arguments '("-i"))
+    (exec-path-from-shell-initialize))
 
   ;; 在 emacs25.1 中, 该版本的 modeline 和以前版本不同, 可以通过如下方式将 modeline 修改为以前的显示形状:
   ;; 在 dotspacemacs/user-config 中加入如下代码:

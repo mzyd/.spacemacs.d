@@ -13,6 +13,7 @@
 (spacemacs/set-leader-keys "oo" 'occur-dwim)
 (spacemacs/set-leader-keys "oi" 'iedit-mode)
 
+
 ;; ;; comment region in js
 ;; (defun set-hotkey-for-js ()
 ;;   (setq js-hook-list
@@ -54,13 +55,26 @@
 (define-key evil-normal-state-map (kbd "; s p") 'edit-at-point-word-paste)
 (define-key evil-normal-state-map (kbd "; s d") 'edit-at-point-word-delete)
 
+;; (define-key evil-normal-state-map (kbd "; g e") 'mzy/jump-to-script-tag)
+;; (define-key evil-normal-state-map (kbd "; g d") 'mzy/jump-to-data)
+;; (define-key evil-normal-state-map (kbd "; g s") 'mzy/jump-to-style)
+;; (define-key evil-normal-state-map (kbd "; g m") 'mzy/jump-to-methods)
+
+(add-hook 'vue-mode-hook
+          (lambda ()
+            (define-key evil-normal-state-map (kbd "; g e") 'mzy/jump-to-script-tag)
+            (define-key evil-normal-state-map (kbd "; g d") 'mzy/jump-to-data)
+            (define-key evil-normal-state-map (kbd "; g s") 'mzy/jump-to-style)
+            (define-key evil-normal-state-map (kbd "; g m") 'mzy/jump-to-methods)
+            ))
+
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
 (define-key evil-normal-state-map (kbd "C-e") nil)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
 (define-key evil-normal-state-map (kbd "s-n") nil)
 (define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
-(global-set-key (kbd "C-;") 'hungry-delete-backward)
+;; (global-set-key (kbd "C-;") 'hungry-delete-backward)
 
 (spacemacs/set-leader-keys "/" nil)
 (spacemacs/set-leader-keys "/" 'replace-regexp)
@@ -72,8 +86,6 @@
 (global-set-key (kbd "C-s q s") 'isearch-forward)
 (global-set-key (kbd "C-s s") 'swiper-thing-at-point)
 (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
-
-;; (global-set-key (kbd "C-j") nil)
 
 (define-key evil-normal-state-map (kbd ", 0") 'winum-select-window-0)
 (define-key evil-normal-state-map (kbd ", 1") 'winum-select-window-1)
@@ -100,4 +112,3 @@
 
 ;; normal-state 下 RET 键打开最近的 buffer 列表
 (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
-;; (define-key evil-normal-state-map (kbd "<RET>") 'helm-projectile-find-file)

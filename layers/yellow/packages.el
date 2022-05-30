@@ -375,8 +375,40 @@ end tell
   (evil-ex "%s/")
   )
 
+(defun mzy/jump-to-script-tag ()
+  (interactive)
+  (if (search-forward "<scrip" nil t)
+      (search-backward "<scrip" nil t)
+    (search-backward "<scrip" nil t)
+    )
+  )
+
+(defun mzy/jump-to-data ()
+  (interactive)
+  (if (search-forward "data() {" nil t)
+      (search-backward "data() {" nil t)
+    (search-backward "data() {" nil t)
+    )
+  )
+
+(defun mzy/jump-to-style ()
+  (interactive)
+  (if (search-forward "<style" nil t)
+      (search-backward "<style" nil t)
+    (search-backward "<style" nil t)
+    )
+  )
+(defun mzy/jump-to-methods ()
+  (interactive)
+  (if (search-forward "methods:" nil t)
+      (search-backward "methods:" nil t)
+    (search-backward "methods:" nil t)
+    )
+  )
+
+
+
 ;; (defun mzy/open-finder-by-fasd ()
 ;;   (interactive)
 ;;   (helm-fasd "front")
 ;;   )
-

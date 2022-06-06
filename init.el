@@ -12,6 +12,13 @@
 ;; g d : go to define
 ;; g ; - jump to last change
 ;; g f - find-file-at-point
+;; S-j: change you cursor to other side while you selecting a region
+
+;; ---------- vim ----------
+;; normal-map :
+;; * : jump to next the same word, and you can edit it.
+;; vv: you've entered the visual mode, and then, press 'e' you'll be enter the i-edit-mode
+;; vv-U : upcase the region, vv-u: downcase the region
 
 
 (defun dotspacemacs/layers ()
@@ -87,6 +94,7 @@ This function should only modify configuration layer settings."
    ;; consider creating a layer. You can also put the configuration in
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    dotspacemacs-additional-packages '(
+                                      exec-path-from-shell
                                       zone-rainbow ;; for fun
                                       keyfreq
                                       edit-at-point

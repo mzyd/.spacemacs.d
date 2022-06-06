@@ -9,6 +9,22 @@
 ;;
 ;;; License: GPLv3
 
+;; /////////////////////////// set key to nil ////////////////////////////
+(global-set-key (kbd "C-s") nil)
+(global-set-key (kbd "s-w") nil)
+(define-key evil-normal-state-map (kbd "C-e") nil)
+(define-key evil-normal-state-map (kbd "s-n") nil)
+(define-key evil-motion-state-map (kbd ";") nil)
+(spacemacs/set-leader-keys "/" nil)
+
+;; ****** nil key ******
+(global-set-key (kbd "s-d") nil)
+(global-set-key (kbd "s-e") nil)
+(global-set-key (kbd "s-i") nil)
+
+;; /////////////////////////// set key to nil ////////////////////////////
+
+
 ;; 打开occur模式
 (spacemacs/set-leader-keys "oo" 'occur-dwim)
 (spacemacs/set-leader-keys "oi" 'iedit-mode)
@@ -46,7 +62,6 @@
 (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
 
 ;; Cancel the default function
-(define-key evil-motion-state-map (kbd ";") nil)
 (define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
 (define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
 (define-key evil-normal-state-map (kbd "; s c") 'edit-at-point-word-cut)
@@ -70,19 +85,15 @@
 
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
-(define-key evil-normal-state-map (kbd "C-e") nil)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
-(define-key evil-normal-state-map (kbd "s-n") nil)
 (define-key evil-normal-state-map (kbd "s-n") 'evil-jump-item)
 ;; (global-set-key (kbd "C-;") 'hungry-delete-backward)
 
-(spacemacs/set-leader-keys "/" nil)
 (spacemacs/set-leader-keys "/" 'replace-regexp)
 (define-key evil-visual-state-map (kbd ", s r") 'replace-string)
 
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 
-(global-set-key (kbd "C-s") nil)
 (global-set-key (kbd "C-s q s") 'isearch-forward)
 (global-set-key (kbd "C-s s") 'swiper-thing-at-point)
 (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
@@ -95,6 +106,7 @@
 (define-key evil-normal-state-map (kbd ", w /") 'split-window-right)
 (define-key evil-normal-state-map (kbd ", w s") 'split-window-below)
 (define-key evil-normal-state-map (kbd ", w d") 'delete-window)
+(global-set-key (kbd "s-w") 'delete-window)
 
 ;; comment indent
 (spacemacs/set-leader-keys ";" 'evilnc-comment-or-uncomment-lines)
@@ -108,7 +120,12 @@
 
 (global-set-key (kbd "s-;") 'company-files)
 ;; dired-mode backward
-(global-set-key (kbd "s-b") 'dired-up-directory)
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (local-set-key (kbd "s-b") 'dired-up-directory)
+            ))
+
 
 ;; normal-state 下 RET 键打开最近的 buffer 列表
 (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
+

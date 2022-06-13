@@ -300,15 +300,6 @@ end tell
   (goto-char (point-min))
   (while (search-forward "\r" nil t) (replace-match "")))
 
-
-(defun rewrite-at-point ()
-  (interactive)
-  (progn
-    (edit-at-point-word-delete)
-    (evil-insert 1)
-    )
-  )
-
 (defun add-semicolon ();
   (interactive)
   (evil-append-line 1)

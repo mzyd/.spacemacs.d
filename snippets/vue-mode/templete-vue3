@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: templete-vue3
+# key: ttt
+# --
+
+<template>
+  <div>
+    $1
+  </div>
+</template>
+
+<script setup name="$2">
+$3
+</script>
+
+<style scoped lang="scss">
+</style>

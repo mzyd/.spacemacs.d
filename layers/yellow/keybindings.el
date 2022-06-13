@@ -12,6 +12,7 @@
 ;; /////////////////////////// set key to nil ////////////////////////////
 (global-set-key (kbd "C-s") nil)
 (global-set-key (kbd "s-w") nil)
+(global-set-key (kbd "s-o") nil)
 (define-key evil-normal-state-map (kbd "C-e") nil)
 (define-key evil-normal-state-map (kbd "s-n") nil)
 (define-key evil-motion-state-map (kbd ";") nil)
@@ -61,7 +62,6 @@
 (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
 (define-key evil-normal-state-map (kbd ", f f") 'helm-projectile-find-file)
 
-;; Cancel the default function
 (define-key evil-normal-state-map (kbd "; a a") 'edit-at-point-word-copy)
 (define-key evil-normal-state-map (kbd "; c c") 'mzy/edit-at-point-cut-word)
 (define-key evil-normal-state-map (kbd "; s c") 'edit-at-point-word-cut)
@@ -128,4 +128,6 @@
 
 ;; normal-state 下 RET 键打开最近的 buffer 列表
 (define-key evil-normal-state-map (kbd "<RET>") 'helm-mini)
+
+(global-set-key (kbd "s-o") 'mzy/open-cur-finder)
 

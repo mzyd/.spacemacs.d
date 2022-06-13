@@ -679,11 +679,6 @@ before packages are loaded."
   ;;   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   ;;   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
-  ;; (use-package git-gutter+
-  ;;   :ensure
-  ;;   :init (global-git-gutter+-mode)
-  ;;   )
-
   (global-git-gutter-mode 1)
   (custom-set-variables
 
@@ -697,27 +692,6 @@ before packages are loaded."
   (set-face-foreground 'git-gutter:modified "yellow")
   (set-face-foreground 'git-gutter:added "green")
   (set-face-foreground 'git-gutter:deleted "red")
-
-  ;; (use-package git-gutter
-  ;;   :ensure
-  ;;   :init (progn
-  ;;           (setq-default
-  ;;            git-gutter:window-width 2
-  ;;            git-gutter:modified-sign "♣ "
-  ;;            git-gutter:added-sign "♦ "
-  ;;            git-gutter:deleted-sign "✘ "
-  ;;            git-gutter:lighter "GG")
-  ;;           )
-  ;;   (global-git-gutter-mode t)
-  ;;   (set-face-foreground 'git-gutter:modified "yellow")
-  ;;   (set-face-foreground 'git-gutter:added "green")
-  ;;   (set-face-foreground 'git-gutter:deleted "red")
-  ;;   ;; (evil-leader/set-key
-  ;;   ;;   "ghr" #'git-gutter:revert-hunk
-  ;;   ;;   "ghN" #'git-gutter:previous-hunk
-  ;;   ;;   "ghn" #'git-gutter:next-hunk
-  ;;   ;;   "ghs" #'git-gutter:stage-hunk)
-  ;;   )
 
   (use-package web-mode
     :ensure

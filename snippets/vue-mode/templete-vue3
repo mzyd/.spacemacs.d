@@ -4,13 +4,13 @@
 # --
 
 <template>
-  <div>
-    $1
+  <div class="$1">
+    $2
   </div>
 </template>
 
-<script setup name="$2">
-$3
+<script setup name="$3">
+$4
 </script>
 
 <style scoped lang="scss">

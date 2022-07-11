@@ -83,6 +83,7 @@
             (define-key evil-normal-state-map (kbd "; g m") 'mzy/jump-to-methods)
             ))
 
+(global-set-key (kbd "C-;") 'mzy/addSymbalEqaul)
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # contributor: Mzy
-# name: log
-# key: ll
+# name: arrow-simple
+# key: arr
 # --
-console.log('$1', $2)
+($1) => $2

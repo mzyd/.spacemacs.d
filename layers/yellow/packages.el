@@ -315,7 +315,6 @@ end tell
     (message pos)
     (end-of-line)
     (set-mark pos))
-
   ;; (skip-chars-forward "-")
   ;; (evil-insert 1)
   ;; (insert "\n")
@@ -397,7 +396,28 @@ end tell
     )
   )
 
+(defun mzy/format-html()
+  (interactive)
+  (setq cur-line-txt
+        (buffer-substring-no-properties
+         (line-beginning-position)
+         (line-end-position)
+         ))
+  (setq time (- (length (split-string cur-line-txt " ")) 1))
+  (while (> time 0)
+    (search-forward " " nil t)
+    (replace-match "\n")
+    (setq time (- time 1))
+    )
+  )
 
+(defun mzy/addSymbalEqual ()
+  (interactive)
+  (skip-chars-backward "a-z")
+  (insert "=")
+  (skip-chars-forward "a-z")
+  (insert "=")
+  )
 
 ;; (defun mzy/open-finder-by-fasd ()
 ;;   (interactive)

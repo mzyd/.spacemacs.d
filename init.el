@@ -84,6 +84,7 @@ This function should only modify configuration layer settings."
      ;; spell-checking
      syntax-checking
      ;; (version-control :variables version-control-diff-tool 'diff-hl version-control-diff-side 'left)
+
      yellow
      treemacs)
 
@@ -662,8 +663,13 @@ before packages are loaded."
 
   (add-hook 'css-mode-hook 'rainbow-mode)
 
-  (setq-default js2-basic-offset 2)
-  (setq-default js-indent-level 2)
+  (setq-default
+   tab-width 2
+   js2-basic-offset 2
+   ts-indent-offset 2
+   js-indent-level 2
+   typescript-indent-level 2
+   )
 
   ;; close the sideline of lsp-ui
   ;; customize-group -> lsp-ui  -> lsp-ui-sideline -> off
@@ -702,7 +708,7 @@ before packages are loaded."
            '(("\\.css\\'" . scss-mode))
            '(("\\.wxml\\'" . web-mode))
            '(("\\.html\\'" . web-mode))
-           '(("\\.js\\'" . js2-mode))
+           '(("\\.js\\'" . js-mode))
            auto-mode-alist
            ))
     ;; (add-hook 'web-mode-hook 'company-mode)

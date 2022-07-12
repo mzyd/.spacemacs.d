@@ -51,6 +51,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
+   ;; auto-completion
+   ;; lsp
    '(typescript
      sql
      yaml
@@ -61,14 +63,12 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      (go :variables gofmt-command "goimports" go-backend 'lsp go-run-command "ENV_VAR=foo go run" go-format-before-save t go-tab-width 4)
      common-lisp
-     (vue :variables vue-backend 'lsp)
+     (vue :variables vue-backend 'dumb)
      (node :variables node-add-modules-path t)
-     auto-completion
      better-defaults
      emacs-lisp
      git
      helm
-     lsp
      (markdown :variables markdown-live-preview-engine 'vmd)
      react
      fasd
@@ -771,6 +771,20 @@ before packages are loaded."
   (autoload 'ace-pinyin-jump-char-2 "ace-pinyin" "" t)
   ;; (define-key evil-normal-state-map (kbd "; r") 'evil-repeat-find-char)
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
+
+  ;; lsp-bridge
+  (require 'posframe)
+  (when (posframe-workable-p)
+    (posframe-show " *my-posframe-buffer*"
+                   ;; :string "This is a test"
+                   :position (point)))
+
+  (add-to-list 'load-path (expand-file-name "~/lsp-bridge"))
+  ;; (add-to-list 'load-path "~/lsp-bridge/lsp-bridge.el")
+  (require 'lsp-bridge)
+  (global-lsp-bridge-mode)
+
+  ;; lsp-bridge end
 
   ;; forbid generate temporary files
   (setq create-lockfiles nil)

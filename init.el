@@ -14,6 +14,18 @@
 ;; g f - find-file-at-point
 ;; S-j: change you cursor to other side while you selecting a region
 
+;; column edit
+;; example:
+
+;; 123
+;; 321
+;; bar
+;; foo ----|
+;;         V
+;; 123bar
+;; 321foo
+;; command: kill-rectangle
+
 ;; ---------- vim ----------
 ;; normal-map :
 ;; * : jump to next the same word, and you can edit it.
@@ -51,9 +63,8 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   ;; auto-completion
-   ;; lsp
-   '(typescript
+   '(
+     typescript
      sql
      yaml
      ;; ----------------------------------------------------------------
@@ -61,6 +72,8 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     auto-completion
+     lsp
      (go :variables gofmt-command "goimports" go-backend 'lsp go-run-command "ENV_VAR=foo go run" go-format-before-save t go-tab-width 4)
      common-lisp
      (vue :variables vue-backend 'dumb)
@@ -773,17 +786,14 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "; ;") 'ace-pinyin-jump-char-2)
 
   ;; lsp-bridge
-  (require 'posframe)
-  (when (posframe-workable-p)
-    (posframe-show " *my-posframe-buffer*"
-                   ;; :string "This is a test"
-                   :position (point)))
-
-  (add-to-list 'load-path (expand-file-name "~/lsp-bridge"))
-  ;; (add-to-list 'load-path "~/lsp-bridge/lsp-bridge.el")
-  (require 'lsp-bridge)
-  (global-lsp-bridge-mode)
-
+  ;; (require 'posframe)
+  ;; (when (posframe-workable-p)
+  ;;   (posframe-show " *my-posframe-buffer*"
+  ;;                  ;; :string "This is a test"
+  ;;                  :position (point)))
+  ;; (add-to-list 'load-path (expand-file-name "~/lsp-bridge"))
+  ;; (require 'lsp-bridge)
+  ;; (global-lsp-bridge-mode)
   ;; lsp-bridge end
 
   ;; forbid generate temporary files

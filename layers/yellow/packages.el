@@ -396,7 +396,7 @@ end tell
     )
   )
 
-(defun mzy/format-html()
+(defun mzy/format-html-to-mutiple-line()
   (interactive)
   (setq cur-line-txt
         (buffer-substring-no-properties
@@ -417,6 +417,34 @@ end tell
   (insert "=")
   (skip-chars-forward "a-z")
   (insert "=")
+  )
+
+(defun mzy/go1 ()
+  (interactive)
+  (forward-line 0)
+  )
+
+(defun mzy/format-by-comma-for-js ()
+  (interactive)
+  (forward-line 0)
+
+  (search-forward "{ " nil t)
+  (replace-match "{\n  ")
+
+  (setq cur-line-txt
+        (buffer-substring-no-properties
+         (line-beginning-position)
+         (line-end-position)
+         ))
+  (setq time (- (length (split-string cur-line-txt ",")) 1))
+  (while (> time 0)
+    (search-forward "," nil t)
+    (replace-match ",\n ")
+    (setq time (- time 1))
+    )
+
+  (search-forward " } " nil t)
+  (replace-match "\n} ")
   )
 
 ;; (defun mzy/open-finder-by-fasd ()

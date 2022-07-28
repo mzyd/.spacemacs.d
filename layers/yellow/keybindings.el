@@ -14,6 +14,7 @@
 (global-set-key (kbd "s-w") nil)
 (global-set-key (kbd "s-o") nil)
 (define-key evil-normal-state-map (kbd "C-e") nil)
+(define-key evil-normal-state-map (kbd ", ,") nil)
 (define-key evil-normal-state-map (kbd "s-n") nil)
 (define-key evil-motion-state-map (kbd ";") nil)
 (spacemacs/set-leader-keys "/" nil)
@@ -57,6 +58,7 @@
 (global-set-key (kbd "M-m o k") 'cd-iterm2)
 
 (define-key evil-normal-state-map (kbd ", ;") 'add-semicolon)
+(define-key evil-normal-state-map (kbd ", ,") 'other-window)
 
 (define-key evil-normal-state-map (kbd ", e b") 'eval-buffer)
 (define-key evil-normal-state-map (kbd ", s s") 'swiper-thing-at-point)
@@ -69,6 +71,9 @@
 (define-key evil-normal-state-map (kbd "; r r") 'mzy/evil-ex-%s)
 (define-key evil-normal-state-map (kbd "; s p") 'edit-at-point-word-paste)
 (define-key evil-normal-state-map (kbd "; s d") 'edit-at-point-word-delete)
+
+;; js
+(define-key evil-normal-state-map (kbd "; j f") 'mzy/format-by-comma-for-js)
 
 ;; (define-key evil-normal-state-map (kbd "; g e") 'mzy/jump-to-script-tag)
 ;; (define-key evil-normal-state-map (kbd "; g d") 'mzy/jump-to-data)
@@ -95,8 +100,6 @@
 
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 
-(global-set-key (kbd "C-s q s") 'isearch-forward)
-(global-set-key (kbd "C-s s") 'swiper-thing-at-point)
 (global-set-key (kbd "C-s k") 'wrap-markup-region-by-tag)
 
 (define-key evil-normal-state-map (kbd ", 0") 'winum-select-window-0)

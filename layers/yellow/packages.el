@@ -447,6 +447,29 @@ end tell
   (replace-match "\n} ")
   )
 
+(defun mzy/remove-log ()
+  (interactive)
+  (let* ((cmd "ag console.log")
+         (output (shell-command-to-string cmd))
+         (lines (split-string output "[\n\r]+"))
+         (rest '())
+         )
+
+    (setq lines (seq-filter (lambda (x) (> (length x) 0)) lines))
+
+    (setq rest (mapcar (lambda (x)
+                         (nth 0 (split-string x ":"))
+                         ) lines))
+
+    (setq rest (delete-duplicates rest :test #'string-equal))
+
+    (mapcar (lambda (x)
+              (shell-command (format "sed -i\'\' '\/console.log/d\' %s" x))
+              ) rest)
+    ))
+
+(defun mzy/search-str-to-buffer ()
+  )
 ;; (defun mzy/open-finder-by-fasd ()
 ;;   (interactive)
 ;;   (helm-fasd "front")

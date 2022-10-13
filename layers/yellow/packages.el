@@ -449,7 +449,8 @@ end tell
 
 (defun mzy/remove-log ()
   (interactive)
-  (let* ((cmd "ag console.log")
+  (let* (
+         (cmd "ag console.log")
          (output (shell-command-to-string cmd))
          (lines (split-string output "[\n\r]+"))
          (rest '())
@@ -464,9 +465,16 @@ end tell
     (setq rest (delete-duplicates rest :test #'string-equal))
 
     (mapcar (lambda (x)
-              (shell-command (format "sed -i\'\' '\/console.log/d\' %s" x))
+              ;; (shell-command (format "sed -i\'\' -e '\/console.log/d\' %s" x))
+              (shell-command (format "sed -i '' '\/console.log/d\' %s" x))
               ) rest)
     ))
+
+(defun mzy/split-and-copy-window ()
+  (interactive)
+  (delete-other-windows)
+  (split-window-right)
+  )
 
 (defun mzy/search-str-to-buffer ()
   )

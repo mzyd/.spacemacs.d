@@ -72,6 +72,10 @@
 (define-key evil-normal-state-map (kbd "; s p") 'edit-at-point-word-paste)
 (define-key evil-normal-state-map (kbd "; s d") 'edit-at-point-word-delete)
 
+(define-key evil-normal-state-map (kbd "; h f") 'describe-function)
+(define-key evil-normal-state-map (kbd "; h v") 'describe-variable)
+(define-key evil-normal-state-map (kbd "; h k") 'describe-key)
+
 ;; js
 (define-key evil-normal-state-map (kbd "; j f") 'mzy/format-by-comma-for-js)
 
@@ -88,7 +92,7 @@
             (define-key evil-normal-state-map (kbd "; g m") 'mzy/jump-to-methods)
             ))
 
-(global-set-key (kbd "C-;") 'mzy/addSymbalEqaul)
+;; (global-set-key (kbd "C-;") 'mzy/addSymbalEqaul)
 (global-set-key (kbd "C-9") 'wrap-parenthesis-at-point)
 (spacemacs/set-leader-keys "o9" 'wrap-parenthesis-at-point)
 (define-key evil-motion-state-map (kbd "C-e") 'evil-end-of-line)
@@ -121,6 +125,7 @@
 (spacemacs/set-leader-keys "o." 'mzy/open-cur-finder)
 (spacemacs/set-leader-keys "olu" 'edit-at-point-line-up)
 (spacemacs/set-leader-keys "old" 'edit-at-point-line-down)
+(spacemacs/set-leader-keys "ow" 'mzy/split-and-copy-window)
 
 (global-set-key (kbd "s-;") 'company-files)
 ;; dired-mode backward

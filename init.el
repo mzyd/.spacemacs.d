@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(python
      typescript
      sql
      yaml
@@ -721,7 +721,7 @@ before packages are loaded."
            '(("\\.css\\'" . scss-mode))
            '(("\\.wxml\\'" . web-mode))
            '(("\\.html\\'" . web-mode))
-           '(("\\.js\\'" . js-mode))
+           '(("\\.js\\'" . js2-mode))
            auto-mode-alist
            ))
     ;; (add-hook 'web-mode-hook 'company-mode)
@@ -798,6 +798,51 @@ before packages are loaded."
 
   ;; forbid generate temporary files
   (setq create-lockfiles nil)
+
+  ;; ;; eaf
+  ;; (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+  ;; (require 'eaf)
+  ;; (require 'eaf-browser)
+  ;; (require 'eaf-pdf-viewer)
+  ;; (require 'eaf-music-player)
+  ;; (require 'eaf-file-manager)
+  ;; ;; eaf-pdf-viewer LaTeX config
+  ;; (add-to-list 'TeX-command-list '("XeLaTeX" "%`xelatex --synctex=1%(mode)%' %t" TeX-run-TeX nil t))
+  ;; (add-to-list 'TeX-view-program-list '("eaf" eaf-pdf-synctex-forward-view))
+  ;; (add-to-list 'TeX-view-program-selection '(output-pdf "eaf"))
+
+  ;; (setq eaf--mac-enable-rosetta thttp://jandan.net/)
+
+  ;; (use-package org-mac-image-paste
+  ;;               :config
+  ;;               (org-mac-image-paste-mode 1)
+  ;;               )
+  (use-package org-mac-image-paste
+    :load-path "~/code" ; or wherever you cloned to
+    :config
+    (org-mac-image-paste-mode 1)
+    (org-use-property-inheritance t)
+    (org-image-actual-width nil)
+    (org-attach-id-dir ".org-attach")
+    :bind (:map org-mode-map ("C-;" . org-mac-image-paste-refresh-this-node)))
+  ;; (org-use-property-inheritance t) ;Inherit :ID/etc. from parent nodes
+  ;; (org-image-actual-width nil)  ;allow #+ATTR_ORG: :width 300 etc.
+  ;; (org-attach-id-dir ".org-attach") ; make the attachment directoy less obvious
+
+  ;; (use-package eaf
+  ;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework"
+  ;;   :custom
+  ;;   ;; See https://github.com/emacs-eaf/emacs-application-framework/wiki/Customization
+  ;;   (eaf-browser-continue-where-left-off t)
+  ;;   (eaf-browser-enable-adblocker t)
+  ;;   (browse-url-browser-function 'eaf-open-browser)
+  ;;   :config
+  ;;   (defalias 'browse-web #'eaf-open-browser)
+  ;;   (eaf-bind-key scroll_up "C-n" eaf-pdf-viewer-keybinding)
+  ;;   (eaf-bind-key scroll_down "C-p" eaf-pdf-viewer-keybinding)
+  ;;   (eaf-bind-key take_photo "p" eaf-camera-keybinding)
+  ;;   (eaf-bind-key nil "M-q" eaf-browser-keybinding)) ;; unbind, see more in the Wiki
+
   ) ;; user-config-end
 
 

@@ -70,7 +70,7 @@
 (define-key evil-normal-state-map (kbd "; s r") 'mzy/evil-ex-s)
 (define-key evil-normal-state-map (kbd "; r r") 'mzy/evil-ex-%s)
 (define-key evil-normal-state-map (kbd "; s p") 'edit-at-point-word-paste)
-(define-key evil-normal-state-map (kbd "; s d") 'edit-at-point-word-delete)
+(define-key evil-normal-state-map (kbd "; d d") 'edit-at-point-word-delete)
 
 (define-key evil-normal-state-map (kbd "; h f") 'describe-function)
 (define-key evil-normal-state-map (kbd "; h v") 'describe-variable)
